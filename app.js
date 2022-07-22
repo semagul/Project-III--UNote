@@ -19,7 +19,11 @@ require("./config")(app);
 const allRoutes = require("./routes/index.routes");
 app.use("/api", allRoutes);
 
+const notes = require("./routes/notes")
+app.use("/api", notes);
+
 // ❗ To handle errors. Routes that don't exist or errors that you handle in specific routes
 require("./error-handling")(app);
+
 
 module.exports = app;
