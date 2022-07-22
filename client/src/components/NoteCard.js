@@ -13,7 +13,9 @@ const formattedDate = new Date(createdAt).toDateString();
 				<h3>{title}</h3>
 			</Link>
 			
-            {tags.map(el => <span key={el}>{el}</span>)}
+            {tags.map((el, i) => (
+			i === tags.length - 1 ? <span key={el}>{el}</span> : <span key={el}>{el}, </span>
+			))}
 			<p>Created: {formattedDate} </p>
 		
 		</div>
