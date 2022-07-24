@@ -5,8 +5,6 @@ const User = require("../models/User.model")
 const jwt = require("jsonwebtoken");
 const { isAuthenticated } = require("../middleware/jwt");
 
-
-
 // Return res as Express gives error when both functions are valid. 
 router.post('/signup', (req, res, next) => {
     const { name, email, password } = req.body
@@ -17,7 +15,6 @@ router.post('/signup', (req, res, next) => {
         return
     }
     // validate the email address
-
     const emailValid = email.includes('@')
     if (!emailValid) {
         res.status(400).json({ message: "Enter a valid email address" })

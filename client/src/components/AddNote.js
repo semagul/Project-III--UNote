@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import React, { useState } from "react"
 import axios from "axios"
 
 export default function AddNote(props) {
@@ -25,7 +25,7 @@ export default function AddNote(props) {
             .catch(err => console.log(err))
     }
 
-    let updateSelectedTags  =  (event) => {
+    let updateSelectedTags = (event) => {
         let options = event.target.options;
         let arr = []
         for (let i = 0; i < options.length; i++) {

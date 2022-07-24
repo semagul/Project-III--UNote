@@ -9,13 +9,7 @@ const noteSchema = new Schema(
 			{
 				type: String,
 				required: false,
-				// enum: [
-				// 	"daily", "podcast", "restaurant", "bar", "spending",
-				// 	"earning", "job-search", "coding", "film", "series", "music", "concert",
-				// 	"to-do", "period-tracking", "birthday", "networking", "mood-tracking",
-				// 	"appointment", "for-tomorrow"
-				// ],
-				// default: "daily"
+
 			}
 		]
 	},
