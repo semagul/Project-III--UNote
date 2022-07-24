@@ -11,7 +11,7 @@ export default function AudioCard({ title, _id, blobURL, tags, createdAt }) {
                 <h3>{title}</h3>
             </Link>
 
-            <audio src={<Link to={`/bloburl/${_id}`}></Link>} controls="controls" />
+            <audio src={`${process.env.REACT_APP_BLOB_URL}/${_id}`} controls="controls" />
 
             {tags.map((el, i) => (
                 i === tags.length - 1 ? <span key={el}>{el}</span> : <span key={el}>{el}, </span>

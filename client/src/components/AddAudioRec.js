@@ -37,7 +37,7 @@ export default function AddAudioRec(props) {
     };
 
     // E: this will send the mp3 blob to the backend!
-    let upload = (blob, axios) => {
+    let upload = (blob) => {
         var xhr = new XMLHttpRequest();
         var filename = new Date().toLocaleString(); // S:before toISOString()
         xhr.onload = function (e) {
@@ -49,8 +49,7 @@ export default function AddAudioRec(props) {
         var fd = new FormData();
         fd.append("fname", filename);
         fd.append("data", blob);
-
-        xhr.open("POST", "http://localhost:5005/bloburl", true);
+        xhr.open("POST", process.env.REACT_APP_POST_AUDIO_FILE, true);
         xhr.responseType = 'arraybuffer/blob';
         xhr.send(fd);
     }
@@ -62,7 +61,7 @@ export default function AddAudioRec(props) {
             .then(([buffer, blob]) => {
                 const blobURLBackEnd = "http://localhost:5005/bloburl"
                 setBlobUrl(blobURLBackEnd); // E: the backend will change the file to stream from the database
-                upload(blob, axios);
+                upload(blob);
 
                 // setBlobUrl(false);
                 setIsRecording(false);

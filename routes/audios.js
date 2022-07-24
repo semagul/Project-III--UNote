@@ -6,7 +6,7 @@ const multer = require('multer');
 router.get('/audios', (req, res, next) => {
 	Audio.find()
 		.then(audio => {
-			Audio.findOneAndUpdate({ blobURL : { blobURL }}, { $set: { blobURL: `http://localhost:5005/api/bloburl/id` }})
+			// Audio.findOneAndUpdate({ blobURL : { blobURL }}, { $set: { blobURL: `http://localhost:5005/api/bloburl/id` }})
 			res.status(200).json(audio)
 		})
 		.catch(err => next(err))
