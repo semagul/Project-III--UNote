@@ -1,10 +1,23 @@
+const User = require("../models/User");
+const Note = require("../models/Note");
+const Event = require("../models/Event");
+const Audio = require("../models/Audio");
 const router = require("express").Router();
 
-router.get("/", (req, res, next) => {
-  res.json("All good in here");
+router.get("/allitems", (req, res, next) => {
+  const userId = req.payload._id
+  User.findById(userId)
+    .populate("savedNotes")
+    .populate("savedEvents")
+    .populate("savedAudios")
+    .then(user =>
+     { console.log(user)
+      res.json(user)}
+    )
+    .catch(err =>
+       next(err)
+      )
 });
 
-// You put the next routes here 👇
-// example: router.use("/auth", authRoutes)
 
 module.exports = router;

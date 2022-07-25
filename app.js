@@ -26,8 +26,7 @@ const { isAuthenticated } = require('./middleware/jwt')
 
 // 👇 Start handling routes here
 // Contrary to the views version, all routes are controlled from the routes/index.js
-const allRoutes = require("./routes");
-app.use("/api", allRoutes);
+
 
 const auth = require("./routes/auth")
 app.use("/api/auth", auth);
@@ -43,6 +42,9 @@ app.use("/api", isAuthenticated, audios);
 
 const bloburl = require("./routes/bloburl")
 app.use("/api", isAuthenticated, bloburl);
+
+const everyItem = require("./routes/index")
+app.use("/api", isAuthenticated,  everyItem);
 
 // ❗ To handle errors. Routes that don't exist or errors that you handle in specific routes
 require("./error-handling")(app);

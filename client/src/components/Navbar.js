@@ -8,7 +8,7 @@ export default function Navbar() {
 
     return (
         <nav>
-            <Link to="/">
+            <Link to="/allitems">
                 <button>All items</button>
             </Link>
             {isLoggedIn ?

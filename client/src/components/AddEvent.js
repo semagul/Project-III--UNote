@@ -16,7 +16,8 @@ export default function AddEvent(props) {
     
     const handleSubmit = event => {
         event.preventDefault()
-        axios.post('/api/events', { title, startDate, place, details, tags: selectedTags })
+        const storedToken = localStorage.getItem('authToken')
+        axios.post('/api/events', { title, startDate, place, details, tags: selectedTags },{ headers: { Authorization: `Bearer ${storedToken}` } })
             .then(response => {
                 setTitle('')
                 setStartDate('')
@@ -42,7 +43,7 @@ export default function AddEvent(props) {
     const tags = ["daily", "podcast", "restaurant", "bar", "spending",
         "earning", "job-search", "coding", "film", "series", "music", "concert",
         "to-do", "period-tracking", "birthday", "networking", "mood-tracking",
-        "appointment", "for-tomorrow"]
+        "appointment", "for-tomorrow", "grocery"]
 
 
     return (

@@ -9,10 +9,25 @@ const userSchema = new Schema(
     },
     password: String,
     email: String,
-  },
-  {
-    // this second object adds extra properties: `createdAt` and `updatedAt`
-    timestamps: true,
+
+    savedEvents: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Event"
+      }
+    ],
+    savedNotes: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Note"
+      }
+    ],
+    savedAudios: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Audio"
+      }
+    ]
   }
 );
 

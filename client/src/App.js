@@ -7,6 +7,7 @@ import AudioList from './pages/AudioList'
 import EventList from './pages/EventList'
 import Navbar from './components/Navbar'
 import ProtectedRoute from './components/ProtectedRoute';
+import EveryItem from './pages/EveryItem'
 
 function App() {
   return (
@@ -40,6 +41,13 @@ function App() {
             </ProtectedRoute>
           }
         />
+        <Route path='/allitems' 
+        element={
+          <ProtectedRoute redirectTo="/login">
+            <EveryItem />
+          </ProtectedRoute>
+        } />
+
       </Routes>
     </div>
   );

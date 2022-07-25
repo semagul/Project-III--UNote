@@ -13,7 +13,8 @@ export default function AddAudioRec(props) {
 
     const handleSubmit = event => {
         event.preventDefault()
-        axios.post('/api/audios', { title, blobURL, tags: selectedTags })
+        const storedToken = localStorage.getItem('authToken')
+        axios.post('/api/audios', { title, blobURL, tags: selectedTags }, { headers: { Authorization: `Bearer ${storedToken}` } })
             .then(response => {
                 setTitle('')
 // WHAT TO  DO FOR BLOB
@@ -85,7 +86,7 @@ export default function AddAudioRec(props) {
     const tags = ["daily", "podcast", "restaurant", "bar", "spending",
         "earning", "job-search", "coding", "film", "series", "music", "concert",
         "to-do", "period-tracking", "birthday", "networking", "mood-tracking",
-        "appointment", "for-tomorrow"]
+        "appointment", "for-tomorrow", "grocery"]
 
 
     return (

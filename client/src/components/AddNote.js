@@ -9,7 +9,8 @@ export default function AddNote(props) {
 
     const handleSubmit = event => {
         event.preventDefault()
-        axios.post('/api/notes', { title, description, tags: selectedTags })
+        const storedToken = localStorage.getItem('authToken')
+        axios.post('/api/notes', { title, description, tags: selectedTags }, { headers: { Authorization: `Bearer ${storedToken}` } })
             .then(response => {
                 setTitle('')
                 setDescription('')
@@ -36,7 +37,7 @@ export default function AddNote(props) {
     const tags = ["daily", "podcast", "restaurant", "bar", "spending",
         "earning", "job-search", "coding", "film", "series", "music", "concert",
         "to-do", "period-tracking", "birthday", "networking", "mood-tracking",
-        "appointment", "for-tomorrow"]
+        "appointment", "for-tomorrow", "grocery"]
 
 
     return (
