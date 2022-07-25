@@ -23,7 +23,9 @@ export default function EveryItem() {
     return (
         <>
             <h1>All your items</h1>
-            {events.map(event => event.title)}
+            {events.map(event => (event.title)
+            )}
+                
             
         </>
     )

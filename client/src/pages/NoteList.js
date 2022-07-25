@@ -7,7 +7,6 @@ export default function NoteList() {
 	const [notes, setNotes] = useState([])
 
 	const storedToken = localStorage.getItem('authToken')
-// for every request to a project route we need to also send the token
 	const getAllNotes = () => {
 		axios.get("/api/notes", { headers: { Authorization: `Bearer ${storedToken}`}})
 			.then(response => {

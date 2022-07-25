@@ -77,7 +77,7 @@ router.post('/login', (req, res, next) => {
                 )
                 res.status(200).json({ authToken })
             } else {
-                res.status(401).json({ message: 'Unable to authentica' })
+                res.status(401).json({ message: 'Unable to login' })
             }
         })
         .catch(err => {

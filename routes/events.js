@@ -15,22 +15,56 @@ router.post('/events', (req, res, next) => {
 	const { title, startDate, place, details, tags } = req.body
 	Event.create({
 		title, startDate, place, details, tags
-	  })
+	})
 		.then((createdEvent) => {
-		  User.findByIdAndUpdate(
-			req.payload._id,
-			{ $push: { savedEvents: createdEvent._id } },
-			{ new: true }
-		  )
-			.populate('savedEvents')
-			.then((updatedUser) => {
-			  res.status(200).json(updatedUser);
-			});
+			User.findByIdAndUpdate(
+				req.payload._id,
+				{ $push: { savedEvents: createdEvent._id } },
+				{ new: true }
+			)
+				.populate('savedEvents')
+				.then((updatedUser) => {
+					res.status(200).json(updatedUser);
+				});
 		})
 		.catch((err) => {
-		  next(err);
+			next(err);
 		});
 });
+
+router.get('/events/:id', (req, res, next) => {
+	Event.findById(req.params.id)
+		.then(event => {
+			res.status(200).json(event)
+		})
+		.catch(err => next(err))
+});
+
+// put request is to update
+router.put('/events/:id', (req, res, next) => {
+	const { title, startDate, place, details, tags } = req.body
+	Event.findByIdAndUpdate(req.params.id, {
+		title,
+		startDate,
+		place,
+		details,
+		tags
+	}, { new: true })
+		.then(event => {
+			res.status(200).json(event)
+		})
+		.catch(err => next(err))
+});
+
+
+router.delete('/events/:id', (req, res, next) => {
+	Event.findByIdAndDelete(req.params.id)
+		.then(() => {
+			res.status(200).json({ message: 'Event deleted' })
+		})
+		.catch(err => next(err))
+});
+
 
 module.exports = router;
 

@@ -8,6 +8,8 @@ import EventList from './pages/EventList'
 import Navbar from './components/Navbar'
 import ProtectedRoute from './components/ProtectedRoute';
 import EveryItem from './pages/EveryItem'
+import EventDetails from './pages/EventDetails';
+import EditEvent from './pages/EditEvent';
 
 function App() {
   return (
@@ -41,12 +43,26 @@ function App() {
             </ProtectedRoute>
           }
         />
-        <Route path='/allitems' 
-        element={
-          <ProtectedRoute redirectTo="/login">
-            <EveryItem />
-          </ProtectedRoute>
-        } />
+        <Route path='/allitems'
+          element={
+            <ProtectedRoute redirectTo="/login">
+              <EveryItem />
+            </ProtectedRoute>
+          } />
+
+        <Route path='/events/:id'
+          element={
+            <ProtectedRoute redirectTo="/login">
+              <EventDetails />
+            </ProtectedRoute>
+          } />
+
+        <Route path='/events/edit/:id'
+          element={
+            <ProtectedRoute redirectTo="/login">
+              <EditEvent />
+            </ProtectedRoute>
+          } />
 
       </Routes>
     </div>

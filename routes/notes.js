@@ -15,7 +15,7 @@ router.get('/notes', (req, res, next) => {
 // add a new note
 router.post('/notes', (req, res, next) => {
 	const { title, description, tags } = req.body
-	console.log(req.body)
+	// console.log(req.body)
 	Note.create({ title, description, tags })
 		.then(note => {
 			res.status(201).json(note)
