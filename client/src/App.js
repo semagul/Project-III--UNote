@@ -6,17 +6,40 @@ import Login from './pages/Login'
 import AudioList from './pages/AudioList'
 import EventList from './pages/EventList'
 import Navbar from './components/Navbar'
+import ProtectedRoute from './components/ProtectedRoute';
 
 function App() {
   return (
     <div className='App'>
       <Navbar />
       <Routes>
-        <Route path='/notes' element={<NoteList />} />
         <Route path='/signup' element={<Signup />} />
         <Route path='/login' element={<Login />} />
-        <Route path='/audios' element={<AudioList />} />
-        <Route path='/events' element={<EventList />} />
+        <Route
+          path='/notes'
+          element={
+            <ProtectedRoute redirectTo="/login">
+              <NoteList />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path='/audios'
+          element={
+            <ProtectedRoute redirectTo="/login">
+              <AudioList />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path='/events'
+          element={
+            <ProtectedRoute redirectTo="/login">
+              <EventList />
+            </ProtectedRoute>
+          }
+        />
       </Routes>
     </div>
   );

@@ -6,8 +6,9 @@ import EventCard from "../components/EventCard"
 export default function EventList() {
     const [events, setEvents] = useState([])
 
+    const storedToken = localStorage.getItem('authToken')
     const getAllEvents = () => {
-        axios.get("/api/events")
+        axios.get("/api/events", { headers: { Authorization: `Bearer ${storedToken}`}})
             .then(response => {
                 setEvents(response.data)
             })

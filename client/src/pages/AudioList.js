@@ -6,8 +6,9 @@ import AudioCard from "../components/AudioCard"
 export default function NoteList() {
 	const [audios, setAudios] = useState([])
 
+	const storedToken = localStorage.getItem('authToken')
 	const getAllAudios = () => {
-		axios.get("/api/audios")
+		axios.get("/api/audios", { headers: { Authorization: `Bearer ${storedToken}`}})
 			.then(response => {
 				setAudios(response.data)
 			})

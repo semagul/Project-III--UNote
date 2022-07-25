@@ -36,13 +36,13 @@ const notes = require("./routes/notes")
 app.use("/api", isAuthenticated, notes);
 
 const events = require("./routes/events")
-app.use("/api", events);
+app.use("/api", isAuthenticated, events);
 
 const audios = require("./routes/audios")
-app.use("/api", audios);
+app.use("/api", isAuthenticated, audios);
 
 const bloburl = require("./routes/bloburl")
-app.use("/api", bloburl);
+app.use("/api", isAuthenticated, bloburl);
 
 // ❗ To handle errors. Routes that don't exist or errors that you handle in specific routes
 require("./error-handling")(app);
