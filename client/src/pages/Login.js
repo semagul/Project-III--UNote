@@ -21,7 +21,7 @@ export default function Signup() {
                     // console.log(response.data)
                     const token = response.data.authToken
                     loginUser(token)
-                    nagivate('/notes')
+                    nagivate('/')
             })
             .catch(err => {
                 const errorDescription = err.response.data.message

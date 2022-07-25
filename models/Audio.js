@@ -14,7 +14,6 @@ const audioSchema = new Schema(
 		]
 	},
 	{ timestamps: true }
-
 )
 
 const Audio = mongoose.model('Audio', audioSchema);

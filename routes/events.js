@@ -1,5 +1,4 @@
 const router = require("express").Router();
-
 const Event = require('../models/Event');
 
 router.get('/events', (req, res, next) => {
@@ -11,9 +10,9 @@ router.get('/events', (req, res, next) => {
 });
 
 router.post('/events', (req, res, next) => {
-	const { title, date, place, details, tags } = req.body
-	
-	Event.create({ title, date, place, details, tags })
+	const { title, startDate, place, details, tags } = req.body
+
+	Event.create({ title, startDate, place, details, tags })
 		.then(event => {
 			res.status(201).json(event)
 		})

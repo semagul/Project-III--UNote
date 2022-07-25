@@ -16,7 +16,6 @@ export default function Signup() {
         const requestBody = { email, password, name } 
         axios.post('api/auth/signup', requestBody)
             .then(response => {
-                    //redirect to login
                     nagivate('/login')
             })
             .catch(err => {
