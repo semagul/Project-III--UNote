@@ -2,13 +2,16 @@ import React, { useEffect, useState } from "react"
 import axios from "axios"
 import { Link } from 'react-router-dom'
 import SearchBar from '../components/SearchBar'
+import streamAudioWithAuth from '../components/helpers/audioStreamWithAuth'
+import blobUrlFromId from '../components/helpers/blobUrlFromId'
 
 export default function EveryItem() {
     const [events, setEvents] = useState([])
     const [notes, setNotes] = useState([])
     const [audios, setAudios] = useState([])
-    const [searchTag, setSearchTag] = useState("");
-    const [searchTitle, setSearchTitle] = useState("");
+    const [searchTag, setSearchTag] = useState("")
+    const [searchTitle, setSearchTitle] = useState("")
+
 
     const storedToken = localStorage.getItem('authToken')
     const getAllItems = () => {
@@ -59,6 +62,8 @@ export default function EveryItem() {
                             <p>{(item.date)}</p>
                             <p>{(item.place)}</p>
                             <p>{(item.description)}</p>
+                            <p>{(item.createdAt)}</p>
+                            <button onClick={() => streamAudioWithAuth(blobUrlFromId(item._id), storedToken)}>Play</button>
                             {item.tags.map((el, i) => (
                                 i === item.tags.length - 1 ? <span key={el}>{el}</span> : <span key={el}>{el}, </span>
                             ))}
