@@ -1,6 +1,6 @@
 import React from "react"
 
-export default function tags({tags, setTags}) {
+export default function tags({ tags, setTags }) {
 
     const tagList = ["daily", "podcast", "restaurant", "bar", "spending",
         "earning", "job-search", "coding", "film", "series", "music", "concert",
@@ -18,15 +18,12 @@ export default function tags({tags, setTags}) {
         setTags(arr)
     }
 
-
     return (
-        <select name="tags" multiple value={tags}
-            onChange={event => updateTags(event)}>
-            {tagList?.map((tag) => <option key={tag} value={tag}>{tag}</option>)}
+            <select name="tags" multiple value={tags}
+                onChange={event => updateTags(event)}>
+                {tagList?.map((tag) => <option key={tag} value={tag}>{tag}</option>)}
+            </select>
 
-        </select>
-
-        
     )
 }
 

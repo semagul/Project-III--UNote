@@ -8,18 +8,17 @@ export default function EventCard({ _id, title, startDate, place, details, tags 
 
 	return (
 		<div>
-
 			<Link to={`/events/${_id}`}>
 				<h3>{title}</h3>
 			</Link>
 
-			<p>Date: {formattedDate}</p>
-			<p>Time: {eventTime}</p>
-			<p>Place: {place}</p>
-			<p>Details: {details}</p>
-			<p>Tags: {tags}</p>
-
-			
+			<p>{formattedDate}</p>
+			<p>{eventTime}</p>
+			<p>{place}</p>
+			<p>{details}</p>
+			<p>{tags.map((el, i) => (
+				i === tags.length - 1 ? <span key={el}>{el}</span> : <span key={el}>{el}, </span>
+			))}</p>
 		</div>
 	)
 }

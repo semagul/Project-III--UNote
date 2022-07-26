@@ -1,44 +1,25 @@
 import React, { useState } from "react"
 import axios from "axios"
+import Tags from "./Tags";
 
 export default function AddNote(props) {
 
     const [title, setTitle] = useState('')
     const [description, setDescription] = useState('')
-    const [selectedTags, setSelectedTags] = useState([])
+    const [tags, setTags] = useState([])
 
     const handleSubmit = event => {
         event.preventDefault()
         const storedToken = localStorage.getItem('authToken')
-        axios.post('/api/notes', { title, description, tags: selectedTags }, { headers: { Authorization: `Bearer ${storedToken}` } })
+        axios.post('/api/notes', { title, description, tags }, { headers: { Authorization: `Bearer ${storedToken}` } })
             .then(response => {
                 setTitle('')
                 setDescription('')
-                setSelectedTags([])
+                setTags([])
                 props.getAllNotes()
             })
             .catch(err => console.log(err))
     }
-
-    let updateSelectedTags = (event) => {
-        let options = event.target.options;
-        let arr = []
-        for (let i = 0; i < options.length; i++) {
-            if (options[i].selected) {
-                arr.push(options[i].value)
-            }
-        }
-
-        // state is not updated when you console.log here
-        setSelectedTags(arr)
-        console.log(selectedTags)
-    }
-
-    const tags = ["daily", "podcast", "restaurant", "bar", "spending",
-        "earning", "job-search", "coding", "film", "series", "music", "concert",
-        "to-do", "period-tracking", "birthday", "networking", "mood-tracking",
-        "appointment", "for-tomorrow", "grocery"]
-
 
     return (
         <>
@@ -59,12 +40,11 @@ export default function AddNote(props) {
                 />
 
                 <h2>Tags</h2>
-
-                <select name="tags" multiple value={selectedTags}
-                    onChange={event => updateSelectedTags(event)}>
-                    {tags?.map((tag) => <option key={tag} value={tag}>{tag}</option>)}
-
-                </select>
+                <Tags
+                    tags={tags}
+                    setTags={setTags}
+                />
+                
                 <button type="submit">Add this Note ➕</button>
             </form>
 

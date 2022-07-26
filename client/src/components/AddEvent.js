@@ -55,7 +55,7 @@ export default function AddEvent(props) {
                     ]}
                     dateFormat="MMMM d, yyyy h:mm aa"
                 />
-
+                
                 <h2>Place</h2>
                 <input
                     type="text"

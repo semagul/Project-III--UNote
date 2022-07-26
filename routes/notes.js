@@ -16,10 +16,10 @@ router.post('/notes', (req, res, next) => {
 	Note.create({ 
 		title, description, tags
 	 })
-	 .then((createdNotes) => {
+	 .then((createdNote) => {
 		User.findByIdAndUpdate(
 			req.payload._id,
-			{ $push: { createdNotes: createdNotes._id } },
+			{ $push: { createdNotes: createdNote._id } },
 			{ new: true }
 		)
 			.populate('createdNotes')

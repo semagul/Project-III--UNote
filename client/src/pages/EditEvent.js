@@ -11,7 +11,6 @@ export default function EditEvent() {
 	const [tags, setTags] = useState([])
 
 	const { id } = useParams()
-
 	const navigate = useNavigate()
 
 	useEffect(() => {
@@ -39,17 +38,6 @@ export default function EditEvent() {
 			})
 			.catch(err => console.log(err))
 	}
-
-	const deleteEvent = () => {
-		const storedToken = localStorage.getItem('authToken')
-		axios.delete(`/api/events/${id}`, { headers: { Authorization: `Bearer ${storedToken}` } })
-			.then(() => {
-				navigate('/events')
-			})
-			.catch(err => console.log(err))
-	}
-
-
 
 	return (
 		<>
@@ -92,7 +80,6 @@ export default function EditEvent() {
 				<button type="submit">Update this event</button>
 			</form>
 
-			<button onClick={deleteEvent}>Delete this event ❌</button>
 		</>
 	)
 }
