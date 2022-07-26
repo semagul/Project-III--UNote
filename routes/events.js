@@ -43,18 +43,21 @@ router.get('/events/:id', (req, res, next) => {
 // put request is to update
 router.put('/events/:id', (req, res, next) => {
 	const { title, startDate, place, details, tags } = req.body
-	Event.findByIdAndUpdate(req.params.id, {
+	Event
+	.findByIdAndUpdate(req.params.id, {
 		title,
 		startDate,
 		place,
 		details,
 		tags
 	}, { new: true })
-		.then(event => {
+	// .findById(req.params.id).populate('tags')
+	.then(event => {
 			res.status(200).json(event)
 		})
 		.catch(err => next(err))
 });
+
 
 
 router.delete('/events/:id', (req, res, next) => {
