@@ -7,10 +7,7 @@ path = require('path');
 router.get('/bloburl/:id', (req, res, next) => {
 	Audio.findById(req.params["id"])
 		.then(foundId => {
-			console.log(foundId);
-            
             const FNAME = `uploads/${foundId.filename}`;
-            console.log(FNAME);
             var stat = fileSystem.statSync(FNAME);
 
             res.writeHead(200, {

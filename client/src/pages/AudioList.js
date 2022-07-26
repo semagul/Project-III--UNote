@@ -2,9 +2,8 @@ import React, { useEffect, useState } from "react"
 import axios from "axios"
 import AddAudioRec from "../components/AddAudioRec"
 import AudioCard from "../components/AudioCard"
-import packageJson from '../../package.json';
 
-export default function NoteList() {
+export default function AudioList() {
 	const [audios, setAudios] = useState([])
 
 	const storedToken = localStorage.getItem('authToken')

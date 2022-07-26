@@ -6,7 +6,6 @@ const multer = require('multer');
 router.get('/audios', (req, res, next) => {
 	Audio.find()
 		.then(audio => {
-			// Audio.findOneAndUpdate({ blobURL : { blobURL }}, { $set: { blobURL: `http://localhost:5005/api/bloburl/id` }})
 			res.status(200).json(audio)
 		})
 		.catch(err => next(err))
@@ -15,22 +14,16 @@ router.get('/audios', (req, res, next) => {
 
 const upload = multer({ dest: 'uploads/' })
 router.post('/audios', upload.single('data'), (req, res, next) => {
-	console.log(req.body);
-	// console.log("title=" + req.body.evan);
-	// console.log("tags=" + req.body.tags);
 	const { title, tags } = req.body;
 	const filename = req.file.filename;
 	console.log(title, tags);
 	
-	Audio.create({ 
-		title, 
-		filename, 
-		tags 
+	Audio.create({ title, filename, tags 
 	})
-	.then((createdAudios) => {
+	.then((createdAudio) => {
 		User.findByIdAndUpdate(
 			req.payload._id,
-			{ $push: { createdAudios: createdAudios._id } },
+			{ $push: { createdAudios: createdAudio._id } },
 			{ new: true }
 		)
 			.populate('createdAudios')
