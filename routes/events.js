@@ -19,10 +19,10 @@ router.post('/events', (req, res, next) => {
 		.then((createdEvent) => {
 			User.findByIdAndUpdate(
 				req.payload._id,
-				{ $push: { savedEvents: createdEvent._id } },
+				{ $push: { createdEvents: createdEvent._id } },
 				{ new: true }
 			)
-				.populate('savedEvents')
+				.populate('createdEvents')
 				.then((updatedUser) => {
 					res.status(200).json(updatedUser);
 				});

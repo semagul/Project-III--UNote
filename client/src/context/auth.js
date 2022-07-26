@@ -8,27 +8,33 @@ function AuthProviderWrapper(props) {
     const [isLoggedIn, setIsLoggedIn] = useState(false)
     const [isLoading, setIsLoading] = useState(true)
 
-    const loginUser = token => {
-        // store this in local stoga provided by the browser
-        // window is the top level execution method of console.log. window.console.log
-        // window.localStorage.setItem('authToken', token)
-        localStorage.setItem('authToken', token)
-        verifyStoredToken()
+    // const loginUser = token => {
+    //     // store this in local stoga provided by the browser
+    //     // window is the top level execution method of console.log. window.console.log
+    //     // window.localStorage.setItem('authToken', token)
+    //     localStorage.setItem('authToken', token)
+    //     verifyStoredToken()
 
-    }
+    // }
+
+    const storeToken = (token) => {
+        // store this token in local storage
+        localStorage.setItem("authToken", token);
+    };
 
     const logoutUser = () => {
         // remove the token from local storage
-        localStorage.removeItem('authToken')  
+        localStorage.removeItem('authToken')
         // update the state
         setIsLoggedIn(false)
-        setUser(null)     
+        setUser(null)
     }
 
     const verifyStoredToken = () => {
         const storedToken = localStorage.getItem('authToken')
         if (storedToken) {
-            axios.get('/api/auth/verify', { headers: { Authorization: `Bearer ${storedToken}` } })
+            return axios
+                .get('/api/auth/verify', { headers: { Authorization: `Bearer ${storedToken}` } })
                 .then(response => {
                     const user = response.data
                     setUser(user)
@@ -52,11 +58,19 @@ function AuthProviderWrapper(props) {
     }, [])
 
     return (
-         // it covers whatever the component is wrapped around the above tags
-        <AuthContext.Provider value={{ isLoggedIn, user, isLoading, loginUser, logoutUser }}>
+        // it covers whatever the component is wrapped around the above tags
+        <AuthContext.Provider value={{
+            isLoggedIn,
+            storeToken,
+            user,
+            isLoading,
+            verifyStoredToken,
+            logoutUser
+        }}
+        >
             {props.children}
         </AuthContext.Provider>
     )
 }
 
-export { AuthProviderWrapper, AuthContext}
+export { AuthProviderWrapper, AuthContext }

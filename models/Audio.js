@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 const audioSchema = new Schema(
 	{
 		title: String,
-		blobURL: String,
+		filename: String,
 		tags: [
 			{
 				type: String,

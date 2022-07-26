@@ -7,6 +7,7 @@ export default function EventCard({ _id, title, startDate, place, details, tags 
 	
 	return (
 		<div>
+			
 			<Link to={`/events/${_id}`}>
 				<h3>{ title }</h3>
 			</Link>

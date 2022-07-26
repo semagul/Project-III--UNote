@@ -10,6 +10,8 @@ import ProtectedRoute from './components/ProtectedRoute';
 import EveryItem from './pages/EveryItem'
 import EventDetails from './pages/EventDetails';
 import EditEvent from './pages/EditEvent';
+import NoteDetails from './pages/NoteDetails';
+import EditNote from './pages/EditNote';
 
 function App() {
   return (
@@ -18,11 +20,61 @@ function App() {
       <Routes>
         <Route path='/signup' element={<Signup />} />
         <Route path='/login' element={<Login />} />
+
+        <Route path='/allitems'
+          element={
+            <ProtectedRoute redirectTo="/login">
+              <EveryItem />
+            </ProtectedRoute>
+          }
+        />
+
         <Route
           path='/notes'
           element={
             <ProtectedRoute redirectTo="/login">
               <NoteList />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route path='/notes/:id'
+          element={
+            <ProtectedRoute redirectTo="/login">
+              <NoteDetails />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route path='/notes/edit/:id'
+          element={
+            <ProtectedRoute redirectTo="/login">
+              <EditNote />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path='/events'
+          element={
+            <ProtectedRoute redirectTo="/login">
+              <EventList />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route path='/events/:id'
+          element={
+            <ProtectedRoute redirectTo="/login">
+              <EventDetails />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route path='/events/edit/:id'
+          element={
+            <ProtectedRoute redirectTo="/login">
+              <EditEvent />
             </ProtectedRoute>
           }
         />
@@ -35,34 +87,6 @@ function App() {
             </ProtectedRoute>
           }
         />
-        <Route
-          path='/events'
-          element={
-            <ProtectedRoute redirectTo="/login">
-              <EventList />
-            </ProtectedRoute>
-          }
-        />
-        <Route path='/allitems'
-          element={
-            <ProtectedRoute redirectTo="/login">
-              <EveryItem />
-            </ProtectedRoute>
-          } />
-
-        <Route path='/events/:id'
-          element={
-            <ProtectedRoute redirectTo="/login">
-              <EventDetails />
-            </ProtectedRoute>
-          } />
-
-        <Route path='/events/edit/:id'
-          element={
-            <ProtectedRoute redirectTo="/login">
-              <EditEvent />
-            </ProtectedRoute>
-          } />
 
       </Routes>
     </div>

@@ -9,7 +9,7 @@ router.get('/bloburl/:id', (req, res, next) => {
 		.then(foundId => {
 			console.log(foundId);
             
-            const FNAME = `uploads/${foundId.blobURL}`;
+            const FNAME = `uploads/${foundId.filename}`;
             console.log(FNAME);
             var stat = fileSystem.statSync(FNAME);
 

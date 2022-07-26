@@ -13,7 +13,20 @@ export default function EditEvent() {
     const [place, setPlace] = useState('')
     const [details, setDetails] = useState('')
     const [tags, setTags] = useState('')
-
+	
+    useEffect(() => {
+        const storedToken = localStorage.getItem('authToken')
+		axios.get(`/api/events/${id}`, { headers: { Authorization: `Bearer ${storedToken}` } })
+			.then(response => {
+				const { title, date, place, details, tags } = response.data
+				setTitle(title)
+				setDate(date)
+                setPlace(place)
+                setDetails(details)
+                setTags(tags)
+			})
+			.catch(err => console.log(err))
+	}, [])
 
 	const handleSubmit = e => {
 		e.preventDefault()
@@ -36,19 +49,7 @@ export default function EditEvent() {
 			.catch(err => console.log(err))
 	}
 
-    useEffect(() => {
-        const storedToken = localStorage.getItem('authToken')
-		axios.get(`/api/events/${id}`, { headers: { Authorization: `Bearer ${storedToken}` } })
-			.then(response => {
-				const { title, date, place, details, tags } = response.data
-				setTitle(title)
-				setDate(date)
-                setPlace(place)
-                setDetails(details)
-                setTags(tags)
-			})
-			.catch(err => console.log(err))
-	}, [])
+
     
 	return (
 		<>
