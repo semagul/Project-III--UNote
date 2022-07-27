@@ -12,6 +12,8 @@ import EventDetails from './pages/EventDetails';
 import EditEvent from './pages/EditEvent';
 import NoteDetails from './pages/NoteDetails';
 import EditNote from './pages/EditNote';
+import EditAudio from './pages/EditAudio';
+import AudioDetails from './pages/AudioDetails';
 
 function App() {
   return (
@@ -88,6 +90,24 @@ function App() {
           }
         />
 
+        <Route
+          path='/audios/edit/:id'
+          element={
+            <ProtectedRoute redirectTo="/login">
+              <EditAudio />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path='/audios/:id'
+          element={
+            <ProtectedRoute redirectTo="/login">
+              <AudioDetails />
+            </ProtectedRoute>
+          }
+        />
+        
       </Routes>
     </div>
   );

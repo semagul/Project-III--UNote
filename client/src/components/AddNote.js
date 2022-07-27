@@ -32,7 +32,7 @@ export default function AddNote(props) {
                     onChange={event => setTitle(event.target.value)}
                 />
 
-                <h2>Description</h2>
+                <h2>Details</h2>
                 <input
                     type="text"
                     value={description}

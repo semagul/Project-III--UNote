@@ -15,6 +15,7 @@ export default function AddAudioRec(props) {
     const [isBlocked, setIsBlocked] = useState(false);
     const [Mp3Recorder, setMp3Recorder] = useState(new MicRecorder({ bitRate: 128 }));
     const [latestBlobID, setLatestBlobID] = useState('')
+    const [blob, setBlob] = useState(null)
 
 
     useEffect(() => {
@@ -23,13 +24,15 @@ export default function AddAudioRec(props) {
     }, [latestBlobID, blobURL])
 
     const handleSubmit = event => {
-        event.preventDefault()
+        event.preventDefault();
+        (blob != null) && upload(blob); 
     }
 
     let start = () => {
         if (isBlocked) {
             console.log('Permission Denied');
         } else {
+            setBlob(null)
             Mp3Recorder
                 .start()
                 .then(() => {
@@ -41,10 +44,10 @@ export default function AddAudioRec(props) {
     // this will send the mp3 blob to the backend using:
     // https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest
     // https://developer.mozilla.org/en-US/docs/Web/API/FormData/Using_FormData_Objects
-    let upload = (blob) => {
+    let upload = () => {
         var xhr = new XMLHttpRequest();
 
-        xhr.onload = function (e) { // todo to arrow func
+        xhr.onload = function (e) { // don't change to arrow arrow func
             if (this.readyState === 4) {
                 const resp = JSON.parse(e.target.responseText)
                 setLatestBlobID(resp._id);
@@ -64,22 +67,18 @@ export default function AddAudioRec(props) {
         const storedToken = localStorage.getItem('authToken')
         xhr.setRequestHeader('Authorization', 'Bearer ' + storedToken);
         xhr.send(fd);
+
     }
 
-    let stop = (shouldPostNote) => {
+
+    let stop = () => {
         Mp3Recorder
             .stop()
             .getMp3()
             .then(([buffer, blob]) => {
-                if (shouldPostNote) {
-                    upload(blob);
-                } else {
-                    console.log("Discarding note")
-                }
+                setBlob(blob);
                 setIsRecording(false);
                 setIsBlocked(false);
-
-                console.log('blobURL' + blobURL);
             }).catch((e) => console.error(e));
     }
 
@@ -95,9 +94,9 @@ export default function AddAudioRec(props) {
                 />
 
                 <h2>Record an audio</h2>
-                <button onClick={start} disabled={isRecording}>Record</button>
-                <button onClick={() => stop(true)} disabled={!isRecording}>Save</button>
-                <button onClick={() => stop(false)} disabled={!isRecording}>Cancel</button>
+                <button type="button" onClick={start} disabled={isRecording}>Record</button>
+                <button type="button" onClick={stop} disabled={!isRecording}>Stop</button>
+                {/* <button type="button" onClick={cancel} disabled={blob === null && !isRecording}>Cancel</button> */}
 
                 <h2>Tags</h2>
                 <Tags

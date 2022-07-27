@@ -1,18 +1,24 @@
+import axios from 'axios'
 import React, { useState, useEffect } from 'react'
 import { useParams, Link, useNavigate } from 'react-router-dom'
-import blobUrlFromId from './helpers/blobUrlFromId'
-import audiosUrl from './helpers/audiosUrl'
+import streamAudioWithAuth from '../components/helpers/audioStreamWithAuth'
+import blobUrlFromId from '../components/helpers/blobUrlFromId'
 
 export default function AudioDetails() {
 	const [audio, setAudio] = useState(null)
-	
+
 	const { id } = useParams()
 	const navigate = useNavigate()
 
-    useEffect(() => {
-        const blobURLBackEnd = blobUrlFromId(latestBlobID);
-        setBlobUrl(blobURLBackEnd); //the backend will change the file to stream from the database
-    }, [latestBlobID, blobURL])
+	useEffect(() => {
+		const storedToken = localStorage.getItem('authToken')
+		axios.get(`/api/audios/${id}`, { headers: { Authorization: `Bearer ${storedToken}` } })
+			.then(response => {
+				console.log(response)
+				setAudio(response.data)
+			})
+			.catch(err => console.log(err))
+	}, [])
 
 	const deleteAudio = () => {
 		const storedToken = localStorage.getItem('authToken')
@@ -25,16 +31,15 @@ export default function AudioDetails() {
 
 	return (
 		<>
-			{Audio === null ? <h3>Loaading...</h3> :
+			{audio === null ? <h3>Loading...</h3> :
 				<>
 					<h1>Audio Details</h1>
 					<h3>{audio.title}</h3>
-					<p>{audio.tags.map((el, i) => (
-                                i === audio.tags.length - 1 ? <span key={el}>{el}</span> : <span key={el}>{el}, </span>
-                            ))}</p>
-					<Link to={`/audios/audios/${audio._id}`}>
+					<p>{audio.tags.join(", ")}</p>
+					<Link to={`/audios/edit/${audio._id}`}>
 						<button>Edit this audio 📝</button>
 					</Link>
+					<button onClick={() => streamAudioWithAuth(blobUrlFromId(audio._id), localStorage.getItem('authToken'))}>Play</button>
 					<button onClick={deleteAudio}>Delete this audio ❌</button>
 				</>
 			}

@@ -35,9 +35,7 @@ export default function EventDetails() {
 					<p>{event.date}</p>
 					<p>{event.place}</p>
 					<p>{event.details}</p>
-					<p>{event.tags.map((el, i) => (
-                                i === event.tags.length - 1 ? <span key={el}>{el}</span> : <span key={el}>{el}, </span>
-                            ))}</p>
+					<p>{event.tags.join(", ")}</p>
 					<Link to={`/events/edit/${event._id}`}>
 						<button>Edit this event 📝</button>
 					</Link>

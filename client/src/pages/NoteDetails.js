@@ -33,10 +33,8 @@ export default function NoteDetails() {
 					<h1>Note Details</h1>
 					<h3>{note.title}</h3>
 					<p>{note.description}</p>
-					<p>{note.tags.map((el, i) => (
-						i === note.tags.length - 1 ? <span key={el}>{el}</span> : <span key={el}>{el}, </span>
-					))}</p>
 					<p>{note.date}</p>
+					<p>{note.tags.join(", ")}</p>
 					<Link to={`/notes/edit/${note._id}`}>
 						<button>Edit this note 📝</button>
 					</Link>

@@ -19,11 +19,13 @@ export default function tags({ tags, setTags }) {
     }
 
     return (
+        <>
             <select name="tags" multiple value={tags}
                 onChange={event => updateTags(event)}>
                 {tagList?.map((tag) => <option key={tag} value={tag}>{tag}</option>)}
             </select>
-
+            <p>{tags.join(", ")}</p>
+            </>
     )
 }
 

@@ -6,7 +6,7 @@ import Tags from "../components/Tags";
 export default function EditNote() {
 	const [title, setTitle] = useState('')
 	const [description, setDescription] = useState('')
-	const [tags, setTags] = useState('')
+	const [tags, setTags] = useState([])
 
 	const { id } = useParams()
 	const navigate = useNavigate()

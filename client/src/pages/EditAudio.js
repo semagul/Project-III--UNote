@@ -12,7 +12,7 @@ export default function EditAudio() {
 
 	useEffect(() => {
 		const storedToken = localStorage.getItem('authToken')
-		axios.get(`/api/audio/${id}`, { headers: { Authorization: `Bearer ${storedToken}` } })
+		axios.get(`/api/audios/${id}`, { headers: { Authorization: `Bearer ${storedToken}` } })
 			.then(response => {
 				const { title, date, place, details, tags } = response.data
 				setTitle(title)
@@ -25,9 +25,9 @@ export default function EditAudio() {
 		e.preventDefault()
 		const requestBody = { title, tags }
 		const storedToken = localStorage.getItem('authToken')
-		axios.put(`/api/audio/${id}`, requestBody, { headers: { Authorization: `Bearer ${storedToken}` } })
+		axios.put(`/api/audios/edit/${id}`, requestBody, { headers: { Authorization: `Bearer ${storedToken}` } })
 			.then(() => {
-				navigate('/audio')
+				navigate('/audios')
 			})
 			.catch(err => console.log(err))
 	}

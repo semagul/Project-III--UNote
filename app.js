@@ -1,9 +1,19 @@
+const packageJson = require("./package.json")
 // ℹ️ Gets access to environment variables/settings
 // https://www.npmjs.com/package/dotenv
 require("dotenv/config");
 
 // ℹ️ Connects to the database
 require("./db");
+
+//  check if file dir for exists if not create
+
+const fs = require('fs')
+let dir = `${packageJson.blobStoreDir}`
+
+if (!fs.existsSync(dir)) {
+  fs.mkdirSync(dir)
+}
 
 // Handles http requests (express is node js framework)
 // https://www.npmjs.com/package/express

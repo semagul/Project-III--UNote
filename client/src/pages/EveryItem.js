@@ -12,7 +12,6 @@ export default function EveryItem() {
     const [searchTag, setSearchTag] = useState("")
     const [searchTitle, setSearchTitle] = useState("")
 
-
     const storedToken = localStorage.getItem('authToken')
     const getAllItems = () => {
         axios.get("/api/allitems", { headers: { Authorization: `Bearer ${storedToken}` } })
@@ -45,28 +44,39 @@ export default function EveryItem() {
                     return (
                         <div key={item._id}>
                             {events.includes(item) &&
-                                <Link to={`/events/${item._id}`}>
-                                    <h2>{(item.title)}</h2>
-                                </Link>}
+                                <>
+                                    <Link to={`/events/${item._id}`}>
+                                        <h2>{(item.title)}</h2>
+                                    </Link>
+                                    <p>{new Date(item.startDate).toDateString()}</p>
+                                    <p>{new Date(item.startDate).toTimeString().substring(0, 5)}</p>
+                                    <p>{(item.place)}</p>
+                                </>
+                            }
 
                             {notes.includes(item) &&
-                                <Link to={`/notes/${item._id}`}>
-                                    <h2>{(item.title)}</h2>
-                                </Link>}
+                                <>
+                                    <Link to={`/notes/${item._id}`}>
+                                        <h2>{(item.title)}</h2>
+                                    </Link>
+                                    <p>{(item.description)}</p>
+                                    <p>{new Date(item.createdAt).toDateString()}</p>
+                                </>
+                            }
 
                             {audios.includes(item) &&
-                                <Link to={`/audios/${item._id}`}>
-                                    <h2>{(item.title)}</h2>
-                                </Link>}
+                                <>
+                                    <Link to={`/audios/${item._id}`}>
+                                        <h2>{(item.title)}</h2>
+                                    </Link>
+                                    <button onClick={() => streamAudioWithAuth(blobUrlFromId(item._id), storedToken)}>
+                                        Play
+                                    </button>
+                                    <p>{new Date(item.createdAt).toDateString()}</p>
+                                </>
+                            }
 
-                            <p>{(item.date)}</p>
-                            <p>{(item.place)}</p>
-                            <p>{(item.description)}</p>
-                            <p>{(item.createdAt)}</p>
-                            <button onClick={() => streamAudioWithAuth(blobUrlFromId(item._id), storedToken)}>Play</button>
-                            {item.tags.map((el, i) => (
-                                i === item.tags.length - 1 ? <span key={el}>{el}</span> : <span key={el}>{el}, </span>
-                            ))}
+                            {item.tags.join(", ")}
                         </div>
                     )
                 })

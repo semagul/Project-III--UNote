@@ -16,9 +16,7 @@ export default function EventCard({ _id, title, startDate, place, details, tags 
 			<p>{eventTime}</p>
 			<p>{place}</p>
 			<p>{details}</p>
-			<p>{tags.map((el, i) => (
-				i === tags.length - 1 ? <span key={el}>{el}</span> : <span key={el}>{el}, </span>
-			))}</p>
+			<p>{tags.join(", ")}</p>
 		</div>
 	)
 }
