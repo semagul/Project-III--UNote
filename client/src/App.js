@@ -31,8 +31,7 @@ function App() {
           }
         />
 
-        <Route
-          path='/notes'
+        <Route path='/notes'
           element={
             <ProtectedRoute redirectTo="/login">
               <NoteList />

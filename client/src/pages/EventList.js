@@ -10,7 +10,7 @@ export default function EventList() {
     const getAllEvents = () => {
         axios.get("/api/events", { headers: { Authorization: `Bearer ${storedToken}`}})
             .then(response => {
-                setEvents(response.data)
+                setEvents(response.data.createdEvents)
             })
             .catch(err => console.log(err))
     }

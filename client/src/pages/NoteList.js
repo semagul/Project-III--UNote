@@ -10,7 +10,7 @@ export default function NoteList() {
 	const getAllNotes = () => {
 		axios.get("/api/notes", { headers: { Authorization: `Bearer ${storedToken}`}})
 			.then(response => {
-				setNotes(response.data)
+				setNotes(response.data.createdNotes)
 			})
 			.catch(err => console.log(err))
 	}

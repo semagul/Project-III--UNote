@@ -4,32 +4,34 @@ const User = require('../models/User');
 
 router.get('/notes', (req, res, next) => {
 	//  console.log('request payload is: ', req.payload)
-	Note.find()
-		.then(notes => {
-			res.status(200).json(notes)
+	const userId = req.payload._id
+	User.findById(userId)
+		.populate("createdNotes")
+		.then(user => {
+			res.status(200).json(user)
 		})
 		.catch(err => next(err))
 });
 
 router.post('/notes', (req, res, next) => {
 	const { title, description, tags } = req.body
-	Note.create({ 
+	Note.create({
 		title, description, tags
-	 })
-	 .then((createdNote) => {
-		User.findByIdAndUpdate(
-			req.payload._id,
-			{ $push: { createdNotes: createdNote._id } },
-			{ new: true }
-		)
-			.populate('createdNotes')
-			.then((updatedUser) => {
-				res.status(200).json(updatedUser);
-			});
 	})
-	.catch((err) => {
-		next(err);
-	});
+		.then((createdNote) => {
+			User.findByIdAndUpdate(
+				req.payload._id,
+				{ $push: { createdNotes: createdNote._id } },
+				{ new: true }
+			)
+				.populate('createdNotes')
+				.then((updatedUser) => {
+					res.status(200).json(updatedUser);
+				});
+		})
+		.catch((err) => {
+			next(err);
+		});
 });
 
 router.get('/notes/:id', (req, res, next) => {

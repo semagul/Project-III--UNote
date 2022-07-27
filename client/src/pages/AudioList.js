@@ -10,7 +10,7 @@ export default function AudioList() {
 	const getAllAudios = () => {
 		axios.get("/api/audios", { headers: { Authorization: `Bearer ${storedToken}`}})
 			.then(response => {
-				setAudios(response.data)
+				setAudios(response.data.createdAudios)
 			})
 			.catch(err => console.log(err))
 	}

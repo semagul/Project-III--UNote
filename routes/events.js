@@ -4,9 +4,11 @@ const User = require("../models/User");
 
 router.get('/events', (req, res, next) => {
 	//  console.log('request payload is: ', req.payload)
-	Event.find()
-		.then(events => {
-			res.status(200).json(events)
+	const userId = req.payload._id
+	User.findById(userId)
+		.populate("createdEvents")
+		.then(user => {
+			res.status(200).json(user)
 		})
 		.catch(err => next(err))
 });

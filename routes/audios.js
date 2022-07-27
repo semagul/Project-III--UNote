@@ -7,9 +7,12 @@ const multer = require('multer')
 
 
 router.get('/audios', (req, res, next) => {
-	Audio.find()
-		.then(audio => {
-			res.status(200).json(audio)
+	//  console.log('request payload is: ', req.payload)
+	const userId = req.payload._id
+	User.findById(userId)
+		.populate("createdAudios")
+		.then(user => {
+			res.status(200).json(user)
 		})
 		.catch(err => next(err))
 });
