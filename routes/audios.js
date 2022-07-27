@@ -11,12 +11,11 @@ router.get('/audios', (req, res, next) => {
 		.catch(err => next(err))
 });
 
-
-const upload = multer({ dest: 'uploads/' })
+// express does not accept mp3 so multer converts it to a string
+const upload = multer({ dest: 'uploads/' });
 router.post('/audios', upload.single('data'), (req, res, next) => {
 	const { title, tags } = req.body;
 	const filename = req.file.filename;
-	console.log(title, tags);
 	
 	Audio.create({ title, filename, tags 
 	})
@@ -29,12 +28,41 @@ router.post('/audios', upload.single('data'), (req, res, next) => {
 			.populate('createdAudios')
 			.then((updatedUser) => {
 				res.status(200).json(updatedUser);
-			});
+			})
 	})
 	.catch((err) => {
-		next(err);
-	});
-});
+		next(err)
+	})
+})
+
+router.get('/audios/:id', (req, res, next) => {
+	Audio.findById(req.params.id)
+		.then(audio => {
+			res.status(200).json(audio)
+		})
+		.catch(err => next(err))
+})
+
+// put request is to update
+router.put('/audios/:id', (req, res, next) => {
+	const { title, tags } = req.body
+	Audio.findByIdAndUpdate(req.params.id, {
+		title,
+		tags
+	}, { new: true })
+	.then(audio => {
+			res.status(200).json(audio)
+		})
+		.catch(err => next(err))
+})
+
+router.delete('/audios/:id', (req, res, next) => {
+	Audio.findByIdAndDelete(req.params.id)
+		.then(() => {
+			res.status(200).json({ message: 'Audio deleted' })
+		})
+		.catch(err => next(err))
+})
 
 
 module.exports = router;

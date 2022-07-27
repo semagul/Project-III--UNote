@@ -51,14 +51,11 @@ router.put('/events/:id', (req, res, next) => {
 		details,
 		tags
 	}, { new: true })
-	// .findById(req.params.id).populate('tags')
 	.then(event => {
 			res.status(200).json(event)
 		})
 		.catch(err => next(err))
 });
-
-
 
 router.delete('/events/:id', (req, res, next) => {
 	Event.findByIdAndDelete(req.params.id)

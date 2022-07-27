@@ -28,7 +28,7 @@ export default function EventDetails() {
 
 	return (
 		<>
-			{event === null ? <h3>You don't have any events yet</h3> :
+			{event === null ? <h3>Loading...</h3> :
 				<>
 					<h1>Event Details</h1>
 					<h3>{event.title}</h3>
