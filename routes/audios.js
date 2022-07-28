@@ -4,7 +4,7 @@ const router = require("express").Router() // object with () you instanciate
 const Audio = require('../models/Audio')
 const User = require('../models/User')
 const multer = require('multer')
-
+const cors = require('cors')
 
 router.get('/audios', (req, res, next) => {
 	//  console.log('request payload is: ', req.payload)
@@ -20,7 +20,7 @@ router.get('/audios', (req, res, next) => {
 
 // express does not accept mp3 so multer converts it to a string
 const upload = multer({ dest: `${packageJson.blobStoreDir}` });
-router.post('/audios', upload.single('data'), (req, res, next) => {
+router.post('/audios',[cors(), upload.single('data')], (req, res, next) => {
 	const { title, tags } = req.body;
 	const filename = req.file.filename;
 	
