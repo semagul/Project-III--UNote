@@ -33,16 +33,16 @@ export default function AddEvent(props) {
 
     return (
         <>
-            <h1>Add an event</h1>
+            <h2>Add an event</h2>
             <form onSubmit={handleSubmit}>
-                <h2>Title</h2>
+                <h3>Title</h3>
                 <input
                     type="text"
                     value={title}
                     onChange={event => setTitle(event.target.value)}
                 />
 
-                <h2>Date & Time</h2>
+                <h3>Date & Time</h3>
                 <DatePicker
                     selected={startDate}
                     onChange={(date) => setStartDate(date)}
@@ -57,21 +57,21 @@ export default function AddEvent(props) {
                 />
                 <p>{formattedDate}</p>
                 
-                <h2>Place</h2>
+                <h3>Place</h3>
                 <input
                     type="text"
                     value={place}
                     onChange={event => setPlace(event.target.value)}
                 />
 
-                <h2>Details</h2>
+                <h3>Details</h3>
                 <input
                     type="text"
                     value={details}
                     onChange={event => setDetails(event.target.value)}
                 />
 
-                <h2>Tags</h2>
+                <h3>Tags</h3>
                 <Tags
                     tags={tags}
                     setTags={setTags}

@@ -23,23 +23,23 @@ export default function AddNote(props) {
 
     return (
         <>
-            <h1>Add a note</h1>
+        <div className="mb-3">
+            <h2>Add a note</h2>
             <form onSubmit={handleSubmit}>
-                <h2>Title</h2>
-                <input
-                    type="text"
+            <label className="form-label"><h2>Title</h2></label>
+                  <input className="form-control"  placeholder="Checkout Bootstrap" type="text"
                     value={title}
-                    onChange={event => setTitle(event.target.value)}
-                />
+                    onChange={event => setTitle(event.target.value)} />
 
-                <h2>Details</h2>
-                <input
+<label className="form-label"><h2>Details</h2></label>
+                <textarea className="form-control" placeholder="Watch tutorials"
                     type="text"
+                    rows="3"
                     value={description}
                     onChange={event => setDescription(event.target.value)}
-                />
+                ></textarea>
 
-                <h2>Tags</h2>
+<label className="form-label"><h2>Tags</h2></label>
                 <Tags
                     tags={tags}
                     setTags={setTags}
@@ -47,6 +47,11 @@ export default function AddNote(props) {
                 
                 <button type="submit">Add this Note ➕</button>
             </form>
+
+            
+  
+
+</div>
 
         </>
     )

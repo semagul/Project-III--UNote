@@ -1,11 +1,11 @@
 import './App.css';
 import { Routes, Route } from 'react-router-dom';
-import NoteList from './pages/NoteList'
-import Signup from './pages/Signup'
-import Login from './pages/Login'
-import AudioList from './pages/AudioList'
-import EventList from './pages/EventList'
-import Navbar from './components/Navbar'
+import NoteList from './pages/NoteList';
+import Signup from './pages/Signup';
+import Login from './pages/Login';
+import AudioList from './pages/AudioList';
+import EventList from './pages/EventList';
+import NavigationBar from './components/Navbar';
 import ProtectedRoute from './components/ProtectedRoute';
 import EveryItem from './pages/EveryItem'
 import EventDetails from './pages/EventDetails';
@@ -15,10 +15,12 @@ import EditNote from './pages/EditNote';
 import EditAudio from './pages/EditAudio';
 import AudioDetails from './pages/AudioDetails';
 
+
 function App() {
+
   return (
     <div className='App'>
-      <Navbar />
+      <NavigationBar />
       <Routes>
         <Route path='/signup' element={<Signup />} />
         <Route path='/login' element={<Login />} />
@@ -106,10 +108,10 @@ function App() {
             </ProtectedRoute>
           }
         />
-        
+
       </Routes>
     </div>
-  );
+  )
 }
 
 export default App;

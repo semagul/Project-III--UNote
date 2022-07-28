@@ -7,6 +7,7 @@ export default function tags({ tags, setTags }) {
         "to-do", "period-tracking", "birthday", "networking", "mood-tracking",
         "appointment", "for-tomorrow", "grocery"]
 
+
     let updateTags = (event) => {
         let options = event.target.options;
         let arr = []
@@ -28,6 +29,7 @@ export default function tags({ tags, setTags }) {
             </>
     )
 }
+
 
 
 

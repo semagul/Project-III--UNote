@@ -1,5 +1,5 @@
+const cors = require('cors')
 const packageJson = require("./package.json")
-
 
 // ℹ️ Gets access to environment variables/settings
 // https://www.npmjs.com/package/dotenv
@@ -22,14 +22,17 @@ if (!fs.existsSync(dir)) {
 const express = require("express");
 
 const app = express();
+// ℹ️ Needed to accept from requests from 'the outside'. CORS stands for cross origin resource sharing
+// unless the request if from the same domain, by default express wont accept POST requests
+app.use(cors())
 
 
 // Todo : Enables the XML form
-app.all('/', function(req, res, next) {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "X-Requested-With");
-    next()
-  });
+// app.use('/', function(req, res, next) {
+//     res.header("Access-Control-Allow-Origin", "*");
+//     res.header("Access-Control-Allow-Headers", "X-Requested-With");
+//     next()
+//   });
 
 // ℹ️ This function is getting exported from the config folder. It runs most pieces of middleware
 require("./config")(app);

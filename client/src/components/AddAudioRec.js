@@ -84,21 +84,21 @@ export default function AddAudioRec(props) {
 
     return (
         <div className="Audios">
-            <h1>Save an audio</h1>
+            <h2>Save an audio</h2>
             <form onSubmit={handleSubmit}>
-                <h2>Title</h2>
+                <h3>Title</h3>
                 <input
                     type="text"
                     value={title}
                     onChange={event => setTitle(event.target.value)}
                 />
 
-                <h2>Record an audio</h2>
+                <h3>Record an audio</h3>
                 <button type="button" onClick={start} disabled={isRecording}>Record</button>
                 <button type="button" onClick={stop} disabled={!isRecording}>Stop</button>
                 {/* <button type="button" onClick={cancel} disabled={blob === null && !isRecording}>Cancel</button> */}
 
-                <h2>Tags</h2>
+                <h3>Tags</h3>
                 <Tags
                     tags={tags}
                     setTags={setTags}
