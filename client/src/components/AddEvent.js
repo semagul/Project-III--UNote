@@ -33,6 +33,7 @@ export default function AddEvent(props) {
 
     return (
         <>
+                  <div className="mb-3">
             <h2>Add an event</h2>
             <form onSubmit={handleSubmit}>
                 <h3>Title</h3>
@@ -79,6 +80,7 @@ export default function AddEvent(props) {
 
                 <button type="submit">Save this event➕</button>
             </form>
+            </div>
         </>
     )
 }

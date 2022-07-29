@@ -25,7 +25,7 @@ export default function AddNote(props) {
         <>
         <div className="mb-3">
             <h2>Add a note</h2>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} width="20%">
             <label className="form-label"><h2>Title</h2></label>
                   <input className="form-control"  placeholder="Checkout Bootstrap" type="text"
                     value={title}
@@ -45,7 +45,7 @@ export default function AddNote(props) {
                     setTags={setTags}
                 />
                 
-                <button type="submit">Add this Note ➕</button>
+                <button type="submit" claassName="btn btn-secondary">Add this Note ➕</button>
             </form>
 
             
