@@ -8,7 +8,7 @@ const { isAuthenticated } = require("../middleware/jwt");
 // Return res as Express gives error when both functions are valid. 
 router.post('/signup', (req, res, next) => {
     const { name, email, password } = req.body
-    console.log(req.body)
+    // console.log(req.body)
     // check if email or name or password are empty
     if (email === '' || name === '' || password === "") {
         res.status(400).json({ message: "Enter email, password and name" })

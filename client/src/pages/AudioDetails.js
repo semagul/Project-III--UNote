@@ -14,7 +14,7 @@ export default function AudioDetails() {
 		const storedToken = localStorage.getItem('authToken')
 		axios.get(`/api/audios/${id}`, { headers: { Authorization: `Bearer ${storedToken}` } })
 			.then(response => {
-				console.log(response)
+				// console.log(response)
 				setAudio(response.data)
 			})
 			.catch(err => console.log(err))

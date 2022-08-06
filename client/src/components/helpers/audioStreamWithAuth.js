@@ -13,7 +13,7 @@ https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API/Using_Web_Audio_A
 export default function streamAudioWithAuth(blobURL, authToken) {
 
     console.log("Attempting to stream from");
-    console.log(blobURL);
+    // console.log(blobURL);
 
     // create context
     let audioCtx = new (window.AudioContext || window.webkitAudioContext)();

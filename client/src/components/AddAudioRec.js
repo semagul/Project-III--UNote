@@ -25,7 +25,7 @@ export default function AddAudioRec(props) {
 
     const handleSubmit = event => {
         event.preventDefault();
-        (blob != null) && upload(blob); 
+        (blob != null) && upload(blob);
     }
 
     let start = () => {
@@ -49,9 +49,11 @@ export default function AddAudioRec(props) {
 
         xhr.onload = function (e) { // don't change to arrow arrow func
             if (this.readyState === 4) {
+                console.log(e)
                 const resp = JSON.parse(e.target.responseText)
+                // todo : handle the wrong case
                 setLatestBlobID(resp._id);
-
+                console.log(resp._id)
                 setTitle('');
                 setTags([]);
                 props.getAllAudios();
