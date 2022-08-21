@@ -3,6 +3,7 @@ import MicRecorder from 'mic-recorder-to-mp3'
 import blobUrlFromId from './helpers/blobUrlFromId'
 import packageJson from '../../package.json'
 import Tags from "./Tags";
+import axios from "axios";
 
 // Instead of axios the audio notes are posted by XMLHttpRequest
 
@@ -25,12 +26,11 @@ export default function AddAudioRec(props) {
 
     const handleSubmit = event => {
         event.preventDefault();
-        (blob != null) && upload(blob);
+        (blob != null) && axiosPost();
     }
 
     const audiosUrl = () => {
-        console.log(`${process.env.PORT}`)
-        return `http://localhost:${process.env.PORT}/api/audios`;
+        return `${packageJson.proxy}/api/audios`;
       }
 
     let start = () => {
@@ -49,30 +49,43 @@ export default function AddAudioRec(props) {
     // this will send the mp3 blob to the backend using:
     // https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest
     // https://developer.mozilla.org/en-US/docs/Web/API/FormData/Using_FormData_Objects
-    let upload = () => {
-        var xhr = new XMLHttpRequest();
+    // let upload = () => {
+    //     var xhr = new XMLHttpRequest();
 
-        xhr.onload = function (e) { // don't change to arrow arrow func
-            console.log(e)
-            if (this.readyState === 4) {
-                const resp = JSON.parse(e.target.responseText)
-                console.log(resp)
+    //     xhr.onload = function (e) { // don't change to arrow arrow func
+    //         console.log(e)
+    //         if (this.readyState === 4) {
+    //             const resp = JSON.parse(e.target.responseText)
+    //             console.log(resp)
+    //             setLatestBlobID(resp._id);
+    //             setTitle('');
+    //             setTags([]);
+    //             props.getAllAudios();
+    //         }
+    //     }
+
+    //     xhr.open("POST", audiosUrl(), true);
+    //     const storedToken = localStorage.getItem('authToken')
+    //     xhr.setRequestHeader('Authorization', 'Bearer ' + storedToken);
+    //     xhr.send(fd);
+    // }
+
+    const axiosPost = () => {
+        const storedToken = localStorage.getItem('authToken')     
+        
+        var fd = new FormData();
+        fd.append("blob", blob);
+        fd.append("title", title);
+        fd.append("tags", tags);
+
+        axios.post('/api/audios', { blob, title, tags }, { headers: {"Content-Type": "multipart/form-data", Authorization: `Bearer ${storedToken}` } })
+            .then(resp=> {
                 setLatestBlobID(resp._id);
                 setTitle('');
                 setTags([]);
                 props.getAllAudios();
-            }
-        }
-
-        var fd = new FormData();
-        fd.append("data", blob);
-        fd.append("title", title);
-        fd.append("tags", tags);
-
-        xhr.open("POST", audiosUrl(), true);
-        const storedToken = localStorage.getItem('authToken')
-        xhr.setRequestHeader('Authorization', 'Bearer ' + storedToken);
-        xhr.send(fd);
+            })
+            .catch(err => console.log(err))
     }
 
 
