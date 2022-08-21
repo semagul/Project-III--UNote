@@ -29,6 +29,7 @@ export default function AddAudioRec(props) {
     }
 
     const audiosUrl = () => {
+        console.log(`${process.env.PORT}`)
         return `http://localhost:${process.env.PORT}/api/audios`;
       }
 
