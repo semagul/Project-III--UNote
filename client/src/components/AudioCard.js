@@ -4,7 +4,6 @@ import StreamAudio from './StreamAudio'
 
 export default function AudioCard({ title, _id, tags, createdAt }) {
     const formattedDate = new Date(createdAt).toDateString()
-    const storedToken = localStorage.getItem('authToken')
 
     return (
         <div>

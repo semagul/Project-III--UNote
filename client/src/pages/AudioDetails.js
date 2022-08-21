@@ -2,7 +2,6 @@ import axios from 'axios'
 import React, { useState, useEffect } from 'react'
 import { useParams, Link, useNavigate } from 'react-router-dom'
 import StreamAudio from '../components/StreamAudio'
-import blobUrlFromId from '../components/helpers/blobUrlFromId'
 
 export default function AudioDetails() {
 	const [audio, setAudio] = useState(null)
@@ -40,7 +39,6 @@ export default function AudioDetails() {
 					</Link>
 
 					<StreamAudio audioID={audio._id} />
-					{/* <button onClick={() => streamAudioWithAuth(blobUrlFromId(audio._id), localStorage.getItem('authToken'))}>Play</button> */}
 					<button onClick={deleteAudio}>Delete this audio ❌</button>
 				</>
 			}
