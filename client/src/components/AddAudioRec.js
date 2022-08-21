@@ -1,36 +1,20 @@
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import MicRecorder from 'mic-recorder-to-mp3'
-import blobUrlFromId from './helpers/blobUrlFromId'
-import packageJson from '../../package.json'
 import Tags from "./Tags";
 import axios from "axios";
-
-// Instead of axios the audio notes are posted by XMLHttpRequest
 
 export default function AddAudioRec(props) {
 
     const [title, setTitle] = useState('')
     const [tags, setTags] = useState([])
     const [isRecording, setIsRecording] = useState(false);
-    const [blobURL, setBlobUrl] = useState('');
     const [isBlocked, setIsBlocked] = useState(false);
     const [Mp3Recorder, setMp3Recorder] = useState(new MicRecorder({ bitRate: 128 }));
-    const [latestBlobID, setLatestBlobID] = useState('')
     const [blob, setBlob] = useState(null)
-
-
-    useEffect(() => {
-        const blobURLBackEnd = blobUrlFromId(latestBlobID);
-        setBlobUrl(blobURLBackEnd); //the backend will change the file to stream from the database
-    }, [latestBlobID, blobURL])
 
     const handleSubmit = event => {
         event.preventDefault();
         (blob != null) && axiosPost();
-    }
-
-    const audiosUrl = () => {
-        return `${packageJson.proxy}/api/audios`;
     }
 
     let start = () => {
@@ -45,30 +29,6 @@ export default function AddAudioRec(props) {
                 }).catch((e) => console.error(e));
         }
     };
-
-    // this will send the mp3 blob to the backend using:
-    // https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest
-    // https://developer.mozilla.org/en-US/docs/Web/API/FormData/Using_FormData_Objects
-    // let upload = () => {
-    //     var xhr = new XMLHttpRequest();
-
-    //     xhr.onload = function (e) { // don't change to arrow arrow func
-    //         console.log(e)
-    //         if (this.readyState === 4) {
-    //             const resp = JSON.parse(e.target.responseText)
-    //             console.log(resp)
-    //             setLatestBlobID(resp._id);
-    //             setTitle('');
-    //             setTags([]);
-    //             props.getAllAudios();
-    //         }
-    //     }
-
-    //     xhr.open("POST", audiosUrl(), true);
-    //     const storedToken = localStorage.getItem('authToken')
-    //     xhr.setRequestHeader('Authorization', 'Bearer ' + storedToken);
-    //     xhr.send(fd);
-    // }
 
     const axiosPost = () => {
         var fd = new FormData();
@@ -85,8 +45,7 @@ export default function AddAudioRec(props) {
                     "Authorization": `Bearer ${storedToken}`
                 }
             })
-            .then(resp => {
-                setLatestBlobID(resp._id);
+            .then(() => {
                 setTitle('');
                 setTags([]);
                 props.getAllAudios();
@@ -127,7 +86,7 @@ export default function AddAudioRec(props) {
                     setTags={setTags}
                 />
 
-                <button type="submit">Save this audio ➕</button>
+                <button type="submit" disabled={isRecording}>Save this audio ➕</button>
             </form>
 
         </div>

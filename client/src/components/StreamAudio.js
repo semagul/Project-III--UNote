@@ -1,10 +1,8 @@
 import { useState, useEffect } from 'react'
 import axios from "axios";
-import blobUrlFromId from './helpers/blobUrlFromId'
-
 
 export default function StreamAudio({ audioID }) {
-    const [blobURL, setBlobURL] = useState(blobUrlFromId(audioID))
+
     const [audioSrc, setAudioSrc] = useState(null)
     const [isPlaying, setIsPlaying] = useState(false)
 
@@ -12,6 +10,10 @@ export default function StreamAudio({ audioID }) {
 
     useEffect(() => {
         getAudioNodeAxios()
+        return () => {
+            console.log(isPlaying)
+            stop()
+        };
     }, [])
 
     const onStreamEnded = (event) => {
@@ -23,6 +25,7 @@ export default function StreamAudio({ audioID }) {
         if (isPlaying === false) {
             audioSrc.start(0)
             setIsPlaying(true)
+            console.log(isPlaying)
             audioSrc.onended = onStreamEnded
         }
     }
@@ -31,46 +34,6 @@ export default function StreamAudio({ audioID }) {
         isPlaying === true && audioSrc.stop()
     }
 
-    // const getAudioNode = () => {
-
-    //     let storedAudioCtx = new (window.AudioContext || window.webkitAudioContext)();
-
-    //     // create source
-    //     let source = storedAudioCtx.createBufferSource();
-
-    //     // route source
-    //     source.connect(storedAudioCtx.destination);
-
-    //     // prepare request
-    //     let request = new XMLHttpRequest();
-    //     request.open('GET', blobURL, true /* async */);
-    //     request.responseType = 'arraybuffer';
-
-    //     request.onload = function () {
-    //         // on load callback
-
-    //         // get audio data
-    //         let audioData = request.response;
-
-    //         // try to decode audio data
-    //         storedAudioCtx.decodeAudioData(audioData,
-    //             function (buffer) {
-    //                 // on success callback
-    //                 console.log("Successfully decoded");
-
-    //                 // set source
-    //                 source.buffer = buffer;
-    //             },
-    //             function (e) {
-    //                 // on error callback
-    //                 console.log("An error occurred");
-    //                 console.log(e);
-    //             });
-    //     };
-    //     request.setRequestHeader("Authorization", `Bearer ${storedToken}`);
-    //     request.send();
-    //     setAudioSrc(source);
-    // }
 
     const getAudioNodeAxios = () => {
 
@@ -82,32 +45,23 @@ export default function StreamAudio({ audioID }) {
         // route source
         source.connect(storedAudioCtx.destination);
 
-        // // prepare request
-        // let request = new XMLHttpRequest();
-        // request.open('GET', blobURL, true /* async */);
-        // request.responseType = 'arraybuffer';
-
         axios.get(
             `/api/bloburl/${audioID}`,
             { responseType: 'arraybuffer', headers: { Authorization: `Bearer ${storedToken}` } }
         )
             .then(response => {
-
                 // get audio data
                 let audioData = response.data;
-// console.log(audioData)
+
                 // try to decode audio data
                 storedAudioCtx.decodeAudioData(audioData,
-                    function (buffer) {
-                        // on success callback
-                        console.log("Successfully decoded");
-
+                    buffer => {
                         // set source
                         source.buffer = buffer;
                         setAudioSrc(source);
 
                     },
-                    function (e) {
+                    e => {
                         // on error callback
                         console.log("An error occurred");
                         console.log(e);
