@@ -21,6 +21,7 @@ router.get('/audios', (req, res, next) => {
 // express does not accept mp3 so multer converts it to a string
 const upload = multer({ dest: `${packageJson.blobStoreDir}` });
 router.post('/audios',[cors(), upload.single('blob')], (req, res, next) => {
+	console.log(req)
 	const { title, tags } = req.body;
 	const filename = req.file.filename;
 	
