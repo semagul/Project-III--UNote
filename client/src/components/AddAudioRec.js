@@ -77,7 +77,8 @@ export default function AddAudioRec(props) {
         fd.append("tags", tags);
 
         const storedToken = localStorage.getItem('authToken')
-        axios.post('/api/audios', { blob, title, tags },
+        console.log(fd.get("blob"))
+        axios.post('/api/audios', fd,
             {
                 headers: {
                     "Content-Type": "multipart/form-data",
