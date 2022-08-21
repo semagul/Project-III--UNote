@@ -52,8 +52,10 @@ export default function AddAudioRec(props) {
         var xhr = new XMLHttpRequest();
 
         xhr.onload = function (e) { // don't change to arrow arrow func
+            console.log(e)
             if (this.readyState === 4) {
                 const resp = JSON.parse(e.target.responseText)
+                console.log(resp)
                 setLatestBlobID(resp._id);
                 setTitle('');
                 setTags([]);
