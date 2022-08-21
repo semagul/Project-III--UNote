@@ -1,7 +1,7 @@
 import axios from 'axios'
 import React, { useState, useEffect } from 'react'
 import { useParams, Link, useNavigate } from 'react-router-dom'
-import streamAudioWithAuth from '../components/helpers/audioStreamWithAuth'
+import StreamAudio from '../components/StreamAudio'
 import blobUrlFromId from '../components/helpers/blobUrlFromId'
 
 export default function AudioDetails() {
@@ -14,7 +14,6 @@ export default function AudioDetails() {
 		const storedToken = localStorage.getItem('authToken')
 		axios.get(`/api/audios/${id}`, { headers: { Authorization: `Bearer ${storedToken}` } })
 			.then(response => {
-				// console.log(response)
 				setAudio(response.data)
 			})
 			.catch(err => console.log(err))
@@ -39,7 +38,9 @@ export default function AudioDetails() {
 					<Link to={`/audios/edit/${audio._id}`}>
 						<button>Edit this audio 📝</button>
 					</Link>
-					<button onClick={() => streamAudioWithAuth(blobUrlFromId(audio._id), localStorage.getItem('authToken'))}>Play</button>
+
+					<StreamAudio audioID={audio._id} />
+					{/* <button onClick={() => streamAudioWithAuth(blobUrlFromId(audio._id), localStorage.getItem('authToken'))}>Play</button> */}
 					<button onClick={deleteAudio}>Delete this audio ❌</button>
 				</>
 			}

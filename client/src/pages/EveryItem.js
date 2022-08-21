@@ -2,8 +2,7 @@ import React, { useEffect, useState } from "react"
 import axios from "axios"
 import { Link } from 'react-router-dom'
 import SearchBar from '../components/SearchBar'
-import streamAudioWithAuth from '../components/helpers/audioStreamWithAuth'
-import blobUrlFromId from '../components/helpers/blobUrlFromId'
+import StreamAudio from "../components/StreamAudio"
 
 export default function EveryItem() {
     const [events, setEvents] = useState([])
@@ -69,9 +68,7 @@ export default function EveryItem() {
                                     <Link to={`/audios/${item._id}`}>
                                         <h2>{(item.title)}</h2>
                                     </Link>
-                                    <button onClick={() => streamAudioWithAuth(blobUrlFromId(item._id), storedToken)}>
-                                        Play
-                                    </button>
+                                    <StreamAudio audioID={item._id} />
                                     <p>{new Date(item.createdAt).toDateString()}</p>
                                 </>
                             }

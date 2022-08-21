@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react"
 import MicRecorder from 'mic-recorder-to-mp3'
 import blobUrlFromId from './helpers/blobUrlFromId'
-import audiosUrl from './helpers/audiosUrl'
+import packageJson from '../../package.json'
 import Tags from "./Tags";
 
 // Instead of axios the audio notes are posted by XMLHttpRequest
@@ -28,6 +28,10 @@ export default function AddAudioRec(props) {
         (blob != null) && upload(blob);
     }
 
+    const audiosUrl = () => {
+        return `${packageJson.proxy}/api/audios`;
+      }
+
     let start = () => {
         if (isBlocked) {
             console.log('Permission Denied');
@@ -49,11 +53,8 @@ export default function AddAudioRec(props) {
 
         xhr.onload = function (e) { // don't change to arrow arrow func
             if (this.readyState === 4) {
-                console.log(e)
                 const resp = JSON.parse(e.target.responseText)
-                // todo : handle the wrong case
                 setLatestBlobID(resp._id);
-                console.log(resp._id)
                 setTitle('');
                 setTags([]);
                 props.getAllAudios();
@@ -69,7 +70,6 @@ export default function AddAudioRec(props) {
         const storedToken = localStorage.getItem('authToken')
         xhr.setRequestHeader('Authorization', 'Bearer ' + storedToken);
         xhr.send(fd);
-
     }
 
 
@@ -98,7 +98,6 @@ export default function AddAudioRec(props) {
                 <h3>Record an audio</h3>
                 <button type="button" onClick={start} disabled={isRecording}>Record</button>
                 <button type="button" onClick={stop} disabled={!isRecording}>Stop</button>
-                {/* <button type="button" onClick={cancel} disabled={blob === null && !isRecording}>Cancel</button> */}
 
                 <h3>Tags</h3>
                 <Tags
