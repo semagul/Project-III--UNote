@@ -31,7 +31,7 @@ export default function AddAudioRec(props) {
 
     const audiosUrl = () => {
         return `${packageJson.proxy}/api/audios`;
-      }
+    }
 
     let start = () => {
         if (isBlocked) {
@@ -71,15 +71,20 @@ export default function AddAudioRec(props) {
     // }
 
     const axiosPost = () => {
-        const storedToken = localStorage.getItem('authToken')     
-        
         var fd = new FormData();
         fd.append("blob", blob);
         fd.append("title", title);
         fd.append("tags", tags);
 
-        axios.post('/api/audios', { blob, title, tags }, { headers: {"Content-Type": "multipart/form-data", Authorization: `Bearer ${storedToken}` } })
-            .then(resp=> {
+        const storedToken = localStorage.getItem('authToken')
+        axios.post('/api/audios', { blob, title, tags },
+            {
+                headers: {
+                    "Content-Type": "multipart/form-data",
+                    "Authorization": `Bearer ${storedToken}`
+                }
+            })
+            .then(resp => {
                 setLatestBlobID(resp._id);
                 setTitle('');
                 setTags([]);
