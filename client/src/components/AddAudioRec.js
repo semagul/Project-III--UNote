@@ -29,7 +29,7 @@ export default function AddAudioRec(props) {
     }
 
     const audiosUrl = () => {
-        return `${packageJson.proxy}/api/audios`;
+        return `http://localhost:${process.env.PORT}/api/audios`;
       }
 
     let start = () => {
