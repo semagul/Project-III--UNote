@@ -33,53 +33,53 @@ export default function AddEvent(props) {
 
     return (
         <>
-                  <div className="mb-3">
-            <h2>Add an event</h2>
-            <form onSubmit={handleSubmit}>
-                <h3>Title</h3>
-                <input
-                    type="text"
-                    value={title}
-                    onChange={event => setTitle(event.target.value)}
-                />
+            <div className="mb-3">
+                <h2>Add an event</h2>
+                <form onSubmit={handleSubmit}>
+                    <h3>Title</h3>
+                    <input
+                        type="text"
+                        value={title}
+                        onChange={event => setTitle(event.target.value)}
+                    />
 
-                <h3>Date & Time</h3>
-                <DatePicker
-                    selected={startDate}
-                    onChange={(date) => setStartDate(date)}
-                    showTimeSelect
-                    timeFormat="HH:mm"
-                    injectTimes={[
-                        setHours(setMinutes(new Date(), 1), 0),
-                        setHours(setMinutes(new Date(), 5), 12),
-                        setHours(setMinutes(new Date(), 59), 23),
-                    ]}
-                    dateFormat="MMMM d, yyyy h:mm aa"
-                />
-                <p>{formattedDate}</p>
-                
-                <h3>Place</h3>
-                <input
-                    type="text"
-                    value={place}
-                    onChange={event => setPlace(event.target.value)}
-                />
+                    <h3>Date & Time</h3>
+                    <DatePicker
+                        selected={startDate}
+                        onChange={(date) => setStartDate(date)}
+                        showTimeSelect
+                        timeFormat="HH:mm"
+                        injectTimes={[
+                            setHours(setMinutes(new Date(), 1), 0),
+                            setHours(setMinutes(new Date(), 5), 12),
+                            setHours(setMinutes(new Date(), 59), 23),
+                        ]}
+                        dateFormat="MMMM d, yyyy h:mm aa"
+                    />
+                    <p>{formattedDate}</p>
 
-                <h3>Details</h3>
-                <input
-                    type="text"
-                    value={details}
-                    onChange={event => setDetails(event.target.value)}
-                />
+                    <h3>Place</h3>
+                    <input
+                        type="text"
+                        value={place}
+                        onChange={event => setPlace(event.target.value)}
+                    />
 
-                <h3>Tags</h3>
-                <Tags
-                    tags={tags}
-                    setTags={setTags}
-                />
+                    <h3>Details</h3>
+                    <input
+                        type="text"
+                        value={details}
+                        onChange={event => setDetails(event.target.value)}
+                    />
 
-                <button type="submit">Save this event➕</button>
-            </form>
+                    <h3>Tags</h3>
+                    <Tags
+                        tags={tags}
+                        setTags={setTags}
+                    />
+
+                    <button className="button" type="submit">Save this event➕</button>
+                </form>
             </div>
         </>
     )

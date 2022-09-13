@@ -23,35 +23,35 @@ export default function AddNote(props) {
 
     return (
         <>
-        <div className="mb-3">
-            <h2>Add a note</h2>
-            <form onSubmit={handleSubmit} width="20%">
-            <label className="form-label"><h2>Title</h2></label>
-                  <input className="form-control"  placeholder="Checkout Bootstrap" type="text"
-                    value={title}
-                    onChange={event => setTitle(event.target.value)} />
+            <div className="mb-3">
+                <h2>Add a note</h2>
+                <form onSubmit={handleSubmit} width="20%">
+                    <label className="form-label"><h2>Title</h2></label>
+                    <input className="form-control" placeholder="Checkout Bootstrap" type="text"
+                        value={title}
+                        onChange={event => setTitle(event.target.value)} />
 
-<label className="form-label"><h2>Details</h2></label>
-                <textarea className="form-control" placeholder="Watch tutorials"
-                    type="text"
-                    rows="3"
-                    value={description}
-                    onChange={event => setDescription(event.target.value)}
-                ></textarea>
+                    <label className="form-label"><h2>Details</h2></label>
+                    <textarea className="form-control" placeholder="Watch tutorials"
+                        type="text"
+                        rows="3"
+                        value={description}
+                        onChange={event => setDescription(event.target.value)}
+                    ></textarea>
 
-<label className="form-label"><h2>Tags</h2></label>
-                <Tags
-                    tags={tags}
-                    setTags={setTags}
-                />
-                
-                <button type="submit" claassName="btn btn-secondary">Add this Note ➕</button>
-            </form>
+                    <label className="form-label"><h2>Tags</h2></label>
+                    <Tags
+                        tags={tags}
+                        setTags={setTags}
+                    />
 
-            
-  
+                    <button className="button" type="submit">Add this Note ➕</button>
+                </form>
 
-</div>
+
+
+
+            </div>
 
         </>
     )

@@ -1,8 +1,6 @@
 import React, { useContext } from 'react'
 import { AuthContext } from '../context/auth'
 import { Link } from 'react-router-dom'
-
-import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
 import Nav from 'react-bootstrap/Nav';
@@ -30,14 +28,14 @@ export default function NavigationBar() {
                                         className="me-2"
                                         aria-label="Search"
                                     />
-                                    <Button variant="outline-secondary">Search</Button>
+                                    <button className="button">Search</button>
                                 </Form>
-                                <Button variant="outline-secondary" onClick={logoutUser}>Logout</Button>
+                                <button className="button" onClick={logoutUser}>Logout</button>
                             </>
                         ) :
                         <>
-                            <Button variant="outline-secondary"><Link to="/login">Login</Link></Button>
-                            <Button variant="outline-secondary"><Link to="/signup">Signup</Link></Button>
+                            <button className="button"><Link to="/login">Login</Link></button>
+                            <button className="button"><Link to="/signup">Signup</Link></button>
 
                         </>
                     }

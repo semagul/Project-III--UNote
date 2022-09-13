@@ -8,7 +8,7 @@ export default function NoteList() {
 
 	const storedToken = localStorage.getItem('authToken')
 	const getAllNotes = () => {
-		axios.get("/api/notes", { headers: { Authorization: `Bearer ${storedToken}`}})
+		axios.get("/api/notes", { headers: { Authorization: `Bearer ${storedToken}` } })
 			.then(response => {
 				setNotes(response.data.createdNotes)
 			})

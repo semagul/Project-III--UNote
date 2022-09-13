@@ -8,24 +8,12 @@ function AuthProviderWrapper(props) {
     const [isLoggedIn, setIsLoggedIn] = useState(false)
     const [isLoading, setIsLoading] = useState(true)
 
-    // const loginUser = token => {
-    //     // store this in local stoga provided by the browser
-    //     // window is the top level execution method of console.log. window.console.log
-    //     // window.localStorage.setItem('authToken', token)
-    //     localStorage.setItem('authToken', token)
-    //     verifyStoredToken()
-
-    // }
-
     const storeToken = (token) => {
-        // store this token in local storage
         localStorage.setItem("authToken", token);
     };
 
     const logoutUser = () => {
-        // remove the token from local storage
         localStorage.removeItem('authToken')
-        // update the state
         setIsLoggedIn(false)
         setUser(null)
     }
@@ -42,7 +30,6 @@ function AuthProviderWrapper(props) {
                     setIsLoading(false)
                 })
                 .catch(err => {
-                    // invalid token
                     setIsLoggedIn(false)
                     setUser(null)
                     setIsLoading(false)
@@ -53,12 +40,10 @@ function AuthProviderWrapper(props) {
     }
 
     useEffect(() => {
-        // check if we have an auth token store
         verifyStoredToken()
     }, [])
 
     return (
-        // it covers whatever the component is wrapped around the above tags
         <AuthContext.Provider value={{
             isLoggedIn,
             storeToken,

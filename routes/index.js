@@ -10,13 +10,14 @@ router.get("/allitems", (req, res, next) => {
     .populate("createdNotes")
     .populate("createdEvents")
     .populate("createdAudios")
-    .then(user =>
-     { console.log(user)
-      res.json(user)}
+    .then(user => {
+      console.log(user)
+      res.json(user)
+    }
     )
     .catch(err =>
-       next(err)
-      )
+      next(err)
+    )
 });
 
 

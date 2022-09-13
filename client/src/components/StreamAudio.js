@@ -39,10 +39,7 @@ export default function StreamAudio({ audioID }) {
 
         let storedAudioCtx = new (window.AudioContext || window.webkitAudioContext)();
 
-        // create source
         let source = storedAudioCtx.createBufferSource();
-
-        // route source
         source.connect(storedAudioCtx.destination);
 
         axios.get(
@@ -50,19 +47,15 @@ export default function StreamAudio({ audioID }) {
             { responseType: 'arraybuffer', headers: { Authorization: `Bearer ${storedToken}` } }
         )
             .then(response => {
-                // get audio data
                 let audioData = response.data;
 
-                // try to decode audio data
                 storedAudioCtx.decodeAudioData(audioData,
                     buffer => {
-                        // set source
                         source.buffer = buffer;
                         setAudioSrc(source);
 
                     },
                     e => {
-                        // on error callback
                         console.log("An error occurred");
                         console.log(e);
                     });
@@ -74,8 +67,8 @@ export default function StreamAudio({ audioID }) {
 
     return (
         <div>
-            <button onClick={play}>Start</button>
-            <button onClick={stop}>Stop</button>
+            <button className="button" onClick={play}>Start</button>
+            <button className="button" onClick={stop}>Stop</button>
         </div>
     )
 }

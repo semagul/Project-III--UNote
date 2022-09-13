@@ -6,29 +6,21 @@ export default function NoteCard({ title, _id, description, tags, createdAt }) {
 
 	return (
 		<>
-	<div className="card" style={{ width: `18rem` }}>
-		<div className="card-body">
+			<div className="flex-container">
+				<div className="card" c>
+					<Link to={`/notes/${_id}`}>
+						<h5 className="card-title">{title}</h5>
+					</Link>
 
-			<Link to={`/notes/${_id}`}>
-			<h5 className="card-title">{title}</h5>
-			</Link>
+					<p className="card-text">{description}</p>
+					<p>{tags.join(", ")}</p>
 
-			<p className="card-text">{description}</p>
-			<p>{tags.join(", ")}</p>
+					<p>{formattedDate} </p>
 
-			<p>{formattedDate} </p>
+				</div>
 
 			</div>
 
-</div>
-    {/* <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-   Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-    <a href="#" class="card-link">Card link</a>
-    <a href="#" class="card-link">Another link</a>
-  </div>
-</div> */}
-
-		
 		</>
 	)
 }

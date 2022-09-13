@@ -49,7 +49,7 @@ export default function EditAudio() {
 					setTags={setTags}
 				/>
 
-				<button type="submit">Update this audio</button>
+				<button className="button" type="submit">Update this audio</button>
 			</form>
 
 		</>

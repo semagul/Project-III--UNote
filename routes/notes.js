@@ -3,7 +3,6 @@ const Note = require('../models/Note');
 const User = require('../models/User');
 
 router.get('/notes', (req, res, next) => {
-	//  console.log('request payload is: ', req.payload)
 	const userId = req.payload._id
 	User.findById(userId)
 		.populate("createdNotes")

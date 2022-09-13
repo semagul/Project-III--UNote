@@ -4,7 +4,7 @@ import { Link, useNavigate } from 'react-router-dom'
 
 export default function Signup() {
 
-    const [name, SetName ] =  useState('');
+    const [name, SetName] = useState('');
     const [email, SetEmail] = useState('');
     const [password, SetPassword] = useState('');
     const [errorMessage, setErrorMessage] = useState(undefined)
@@ -13,10 +13,10 @@ export default function Signup() {
 
     const handleSubmit = e => {
         e.preventDefault()
-        const requestBody = { email, password, name } 
+        const requestBody = { email, password, name }
         axios.post('api/auth/signup', requestBody)
             .then(() => {
-                    nagivate('/login')
+                nagivate('/login')
             })
             .catch(err => {
                 const errorDescription = err.response.data.message
@@ -32,25 +32,25 @@ export default function Signup() {
 
     return (
         <>
-        <h1>Signup</h1>
-        <form onSubmit={handleSubmit}>
-            <label htmlFor='name'>Name: </label>
-            <input type='text' value={name} onChange={handleName}/>
+            <h1>Signup</h1>
+            <form onSubmit={handleSubmit}>
+                <label htmlFor='name'>Name: </label>
+                <input type='text' value={name} onChange={handleName} />
 
-            <label htmlFor='email'>Email: </label>
-            <input type='text' value={email} onChange={handleEmail}/>
+                <label htmlFor='email'>Email: </label>
+                <input type='text' value={email} onChange={handleEmail} />
 
-            <label htmlFor='password'>Password: </label>
-            <input type='password' value={password} onChange={handlePassword}/>
-            
-            <button action="submit">Sign Up</button>
-        </form>
+                <label htmlFor='password'>Password: </label>
+                <input type='password' value={password} onChange={handlePassword} />
 
-        {errorMessage && <h5>{errorMessage}</h5>}
+                <button className="button" action="submit">Sign Up</button>
+            </form>
 
-        <h3>Already have an account?</h3>
-        <Link to="/login">Login</Link>
+            {errorMessage && <h5>{errorMessage}</h5>}
+
+            <h3>Already have an account?</h3>
+            <Link to="/login">Login</Link>
         </>
-    
+
     )
 }

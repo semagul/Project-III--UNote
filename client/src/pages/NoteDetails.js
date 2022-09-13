@@ -36,9 +36,9 @@ export default function NoteDetails() {
 					<p>{note.date}</p>
 					<p>{note.tags.join(", ")}</p>
 					<Link to={`/notes/edit/${note._id}`}>
-						<button>Edit this note 📝</button>
+						<button className="button">Edit this note 📝</button>
 					</Link>
-					<button onClick={deleteNote}>Delete this note ❌</button>
+					<button className="button" onClick={deleteNote}>Delete this note ❌</button>
 				</>
 			}
 

@@ -77,8 +77,8 @@ export default function AddAudioRec(props) {
                 />
 
                 <h3>Record an audio</h3>
-                <button type="button" onClick={start} disabled={isRecording}>Record</button>
-                <button type="button" onClick={stop} disabled={!isRecording}>Stop</button>
+                <button className="button" type="button" onClick={start} disabled={isRecording}>Record</button>
+                <button className="button" type="button" onClick={stop} disabled={!isRecording}>Stop</button>
 
                 <h3>Tags</h3>
                 <Tags
@@ -86,7 +86,7 @@ export default function AddAudioRec(props) {
                     setTags={setTags}
                 />
 
-                <button type="submit" disabled={isRecording}>Save this audio ➕</button>
+                <button className="button" type="submit" disabled={isRecording}>Save this audio ➕</button>
             </form>
 
         </div>

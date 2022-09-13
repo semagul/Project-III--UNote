@@ -31,7 +31,6 @@ export default function EditEvent() {
 		e.preventDefault()
 		const requestBody = { title, date, place, details, tags }
 		const storedToken = localStorage.getItem('authToken')
-		// put request to the backend to update the event
 		axios.put(`/api/events/${id}`, requestBody, { headers: { Authorization: `Bearer ${storedToken}` } })
 			.then(() => {
 				navigate('/events')
@@ -77,7 +76,7 @@ export default function EditEvent() {
 					setTags={setTags}
 				/>
 
-				<button type="submit">Update this event</button>
+				<button className="button" type="submit">Update this event</button>
 			</form>
 
 		</>

@@ -4,7 +4,6 @@ const userSchema = new Schema(
   {
     name: {
       type: String,
-      // unique: true -> Ideally, should be unique, but its up to you
     },
     password: String,
     email: String,

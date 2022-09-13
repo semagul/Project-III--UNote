@@ -6,7 +6,7 @@ fileSystem = require('fs');
 path = require('path');
 
 
-// this is only and solely for streaming
+// this is only for streaming
 router.get('/bloburl/:id', (req, res, next) => {
     Audio.findById(req.params["id"])
         .then(foundId => {
@@ -19,7 +19,7 @@ router.get('/bloburl/:id', (req, res, next) => {
             });
 
             var readStream = fileSystem.createReadStream(FNAME);
-            // We replaced all the event handlers with a simple call to util.pump()
+            // replaced all the event handlers with a simple call to util.pump()
             readStream.pipe(res);
         })
         .catch(err => next(err))

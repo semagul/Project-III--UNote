@@ -27,16 +27,12 @@ export default function EditNote() {
 		e.preventDefault()
 		const requestBody = { title, description, tags }
 		const storedToken = localStorage.getItem('authToken')
-		// put request to the backend to update the note
 		axios.put(`/api/notes/${id}`, requestBody, { headers: { Authorization: `Bearer ${storedToken}` } })
 			.then(() => {
 				navigate('/notes')
 			})
 			.catch(err => console.log(err))
 	}
-
-
-
 
 	return (
 		<>
@@ -61,9 +57,9 @@ export default function EditNote() {
 					tags={tags}
 					setTags={setTags}
 				/>
-				<button type="submit">Update this note</button>
+				<button className="button" type="submit">Update this note</button>
 			</form>
-			
+
 		</>
 	)
 }

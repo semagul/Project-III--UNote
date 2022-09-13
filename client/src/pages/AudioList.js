@@ -8,7 +8,7 @@ export default function AudioList() {
 
 	const storedToken = localStorage.getItem('authToken')
 	const getAllAudios = () => {
-		axios.get("/api/audios", { headers: { Authorization: `Bearer ${storedToken}`}})
+		axios.get("/api/audios", { headers: { Authorization: `Bearer ${storedToken}` } })
 			.then(response => {
 				setAudios(response.data.createdAudios)
 			})

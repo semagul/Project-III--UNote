@@ -4,7 +4,7 @@ import { useParams, Link, useNavigate } from 'react-router-dom'
 
 export default function EventDetails() {
 	const [event, setEvent] = useState(null)
-	
+
 	const { id } = useParams()
 	const navigate = useNavigate()
 
@@ -37,9 +37,9 @@ export default function EventDetails() {
 					<p>{event.details}</p>
 					<p>{event.tags.join(", ")}</p>
 					<Link to={`/events/edit/${event._id}`}>
-						<button>Edit this event 📝</button>
+						<button className="button">Edit this event 📝</button>
 					</Link>
-					<button onClick={deleteEvent}>Delete this event ❌</button>
+					<button className="button" onClick={deleteEvent}>Delete this event ❌</button>
 				</>
 			}
 		</>

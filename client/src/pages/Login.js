@@ -50,7 +50,7 @@ export default function Login() {
                 <label htmlFor='password'>Password: </label>
                 <input type='password' value={password} onChange={handlePassword} />
 
-                <button action="submit">Login</button>
+                <button className="button" action="submit">Login</button>
             </form>
 
             {errorMessage && <h5>{errorMessage}</h5>}

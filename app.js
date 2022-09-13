@@ -59,7 +59,7 @@ const bloburl = require("./routes/bloburl")
 app.use("/api", isAuthenticated, bloburl);
 
 const everyItem = require("./routes/index")
-app.use("/api", isAuthenticated,  everyItem);
+app.use("/api", isAuthenticated, everyItem);
 
 const path = require('path');
 app.use(express.static(path.join(__dirname, "/client/build")))
