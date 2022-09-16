@@ -6,21 +6,23 @@ export default function NoteCard({ title, _id, description, tags, createdAt }) {
 
 	return (
 		<>
-			<div className="flex-container">
-				<div className="card" c>
+			
+				<div className="card">
 					<Link to={`/notes/${_id}`}>
 						<h5 className="card-title">{title}</h5>
 					</Link>
+					
 
+					
 					<p className="card-text">{description}</p>
+					
+					
 					<p>{tags.join(", ")}</p>
-
-					<p>{formattedDate} </p>
-
-				</div>
-
+					
+					
+					<p className="date">{formattedDate} </p>
+					
 			</div>
-
 		</>
 	)
 }

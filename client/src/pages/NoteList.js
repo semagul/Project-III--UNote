@@ -23,7 +23,10 @@ export default function NoteList() {
 		<>
 			<h1>All your notes</h1>
 			<AddNote getAllNotes={getAllNotes} />
+
+			<div className="flex-container">
 			{notes.map(note => <NoteCard key={note._id} {...note} />)}
+			</div>
 		</>
 	)
 }
