@@ -27,22 +27,13 @@ const app = express();
 app.use(cors())
 
 
-// Todo : Enables the XML form
-// app.use('/', function(req, res, next) {
-//     res.header("Access-Control-Allow-Origin", "*");
-//     res.header("Access-Control-Allow-Headers", "X-Requested-With");
-//     next()
-//   });
 
 // ℹ️ This function is getting exported from the config folder. It runs most pieces of middleware
 require("./config")(app);
 
 const { isAuthenticated } = require('./middleware/jwt')
 
-// 👇 Start handling routes here
 // Contrary to the views version, all routes are controlled from the routes/index.js
-
-
 const auth = require("./routes/auth")
 app.use("/api/auth", auth);
 

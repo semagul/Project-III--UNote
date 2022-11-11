@@ -26,8 +26,8 @@
 .card {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   transition: 0.3s;
-  width: 20%;
-  margin: 20px;
+  width: 50%;
+  margin: 18px;
   border-radius: 5px;
   display: inline-flex;
   padding: 15px 7px;
@@ -38,7 +38,9 @@
 }
 
 .flex-container {
-  padding: 2px 16px;
+  height: 100%;
+  width: 100%;
+  padding: 35px;
   display: flex;
   flex-direction: row;
 }
